@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeamProject2.GameObjects.Player;
 
-namespace TeamProject2.Scenes
+namespace TeamProject2
 {
     internal class BattleScene
     {
