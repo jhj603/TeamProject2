@@ -4,9 +4,10 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            GameManager gameManager = new GameManager();
 
-            int a = 10;
+            if (gameManager.Initialize())
+                gameManager.Update();
         }
     }
 }
