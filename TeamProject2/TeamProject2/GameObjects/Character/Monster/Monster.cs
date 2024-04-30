@@ -6,22 +6,32 @@ using System.Threading.Tasks;
 
 namespace TeamProject2
 {
+    enum MonsterType
+    {
+        Minion,
+        VoidInsect,
+        SiegeMinion
+    }
+
     internal class Monster : BaseCharacter
     {
-        // 요구조건을 보고 필요하다고 느끼는 필드를 추가해주세요.
+        MonsterType monsterType;
 
-        // Initialize() 함수를 만들어서 내부에서 필드 값 초기화를 할 수 있게 구현해주세요.
-
-        public int Lv { get; }
-        public string Name { get; }
-        public int Hp { get; set; }
-
-
-        public Monster(int lv, string name, int hp)
+        public Monster(int level, MonsterType type, string name, int attack, int hp)
         {
-            Lv = lv;
-            Name = name;
-            Hp = hp;
+            base.Initialize(level, name, attack, hp, 0);
+
+            monsterType = type;
+        }
+
+        public override void PrintStatus()
+        {
+            Console.Write($"Lv.{Level} {Name}");
+
+            if (CharacterState.Alive == CurrentState)
+                Console.WriteLine($"    HP : {HP}");
+            else if (CharacterState.Dead == CurrentState)
+                Console.WriteLine($"    Dead");
         }
     }
 }

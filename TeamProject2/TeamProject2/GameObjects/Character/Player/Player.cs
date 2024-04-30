@@ -29,7 +29,7 @@ namespace TeamProject2
         }
         
         // 플레이어 상태 보기 - 손두혁
-        public void PrintStatus()
+        public override void PrintStatus()
         {
             Console.WriteLine($"Lv. {Level}");
             Console.Write($"{Name} ( ");

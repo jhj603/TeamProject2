@@ -51,40 +51,62 @@ namespace TeamProject2
                     switch (changeScene)
                     {
                         case SceneType.Main:
-                            if (!sceneDict.ContainsKey(currentScene))
-                                sceneDict.Add(currentScene, scene);
-
-                            if (sceneDict.ContainsKey(changeScene))
-                                scene = sceneDict[changeScene];
-                            else
-                                scene = new MainScene();
-
-                            currentScene = changeScene;
-
-                            if (!scene.Initialize(player))
+                            if (!ChangeScene())
+                            {
+                                Console.WriteLine("씬 변경 실패!");
                                 return;
+                            }
                             break;
                         case SceneType.Status:
-                            if (!sceneDict.ContainsKey(currentScene))
-                                sceneDict.Add(currentScene, scene);
-
-                            if (sceneDict.ContainsKey(changeScene))
-                                scene = sceneDict[changeScene];
-                            else
-                                scene = new StatusScene();
-
-                            currentScene = changeScene;
-
-                            if (!scene.Initialize(player))
+                            if (!ChangeScene())
+                            {
+                                Console.WriteLine("씬 변경 실패!");
                                 return;
+                            }
                             break;
                         case SceneType.Battle:
+                            if (!ChangeScene())
+                            {
+                                Console.WriteLine("씬 변경 실패!");
+                                return;
+                            }
                             break;
                         case SceneType.End:
                             return;
                     }
                 }
             }
+        }
+
+        bool ChangeScene()
+        {
+            if (!sceneDict.ContainsKey(currentScene))
+                sceneDict.Add(currentScene, scene);
+
+            if (sceneDict.ContainsKey(changeScene))
+                scene = sceneDict[changeScene];
+            else
+            {
+                switch (changeScene)
+                {
+                    case SceneType.Main:
+                        scene = new MainScene();
+                        break;
+                    case SceneType.Status:
+                        scene = new StatusScene();
+                        break;
+                    case SceneType.Battle:
+                        scene = new BattleScene();
+                        break;
+                }               
+            }
+
+            currentScene = changeScene;
+
+            if (!scene.Initialize(player))
+                return false;
+
+            return true;
         }
     }
 }
