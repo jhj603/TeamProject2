@@ -1,12 +1,11 @@
-﻿namespace TeamProject2
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace TeamProject2
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
-            int a = 10;
         }
     }
 }

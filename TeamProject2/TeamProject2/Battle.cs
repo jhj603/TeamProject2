@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamProject2.GameObjects.Monster
+namespace TeamProject2
 {
-    internal class Monster
+    internal class Battle
     {
     }
 }
