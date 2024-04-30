@@ -22,7 +22,7 @@ namespace TeamProject2
                 case 1:
                     break;
                 case 2:
-                    break;
+                    return SceneType.Battle;
                 default:
                     break;
             }

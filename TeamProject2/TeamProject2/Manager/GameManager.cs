@@ -63,6 +63,16 @@ namespace TeamProject2
                                 return;
                             break;
                         case SceneType.Battle:
+                            if (!sceneDict.ContainsKey(currentScene))
+                                sceneDict.Add(currentScene, scene);
+
+                            if (sceneDict.ContainsKey(changeScene))
+                                scene = sceneDict[changeScene];
+                            else
+                                scene = new BattleScene();
+
+                            if (!scene.Initialize(player))
+                                return;
                             break;
                     }
                 }

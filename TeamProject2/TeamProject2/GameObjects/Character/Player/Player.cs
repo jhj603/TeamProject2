@@ -16,6 +16,8 @@ namespace TeamProject2
 
     internal class Player : BaseCharacter
     {
+        internal static object player;
+
         public PlayerJob Job { get; private set; }
         public int Defense { get; private set; }
 
@@ -31,7 +33,19 @@ namespace TeamProject2
         // 플레이어 상태 보기 - 손두혁
         public void PrintStatus()
         {
+            string nameinput = Name;
 
+            PlayerJob inputJob = Job;
+
+            Console.WriteLine($"Lv.{Level} {nameinput} ({inputJob})");
+            Console.WriteLine($"HP {HP}/{HP}");
+        }
+
+        public void PlayerName()
+        {
+            string nameinput = Name;
+
+            Console.WriteLine($"{nameinput} 의 공격");
         }
     }
 }
