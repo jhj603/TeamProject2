@@ -31,7 +31,26 @@ namespace TeamProject2
         // 플레이어 상태 보기 - 손두혁
         public void PrintStatus()
         {
+            Console.WriteLine($"Lv. {Level}");
+            Console.Write($"{Name} ( ");
 
+            switch (Job)
+            {
+                case PlayerJob.Warrior:
+                    Console.WriteLine("전사 )");
+                    break;
+                case PlayerJob.Magician:
+                    Console.WriteLine("마법사 )");
+                    break;
+                case PlayerJob.Archer:
+                    Console.WriteLine("궁수 )");
+                    break;
+            }
+
+            Console.WriteLine($"공격력 : {Attack}");
+            Console.WriteLine($"방어력 : {Defense}");
+            Console.WriteLine($"체  력 : {HP}");
+            Console.WriteLine($"Gold   : {Gold}");
         }
     }
 }

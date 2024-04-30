@@ -36,6 +36,8 @@ namespace TeamProject2
 
             player.PrintStatus();
 
+            Console.WriteLine("\n0. 나가기");
+
             Console.WriteLine();
         }
     }

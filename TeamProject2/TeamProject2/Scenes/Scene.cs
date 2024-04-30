@@ -13,7 +13,8 @@ namespace TeamProject2
         Main,
         Status,
         Battle,
-        NoChange
+        NoChange,
+        End
     }
 
     internal abstract class Scene
@@ -24,14 +25,12 @@ namespace TeamProject2
 
         public virtual bool Initialize(Player playerInstance)
         {
+            player = playerInstance;
+
             if (null == player)
-            {
-                player = playerInstance;
+                return false;
 
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
         public abstract SceneType Update();

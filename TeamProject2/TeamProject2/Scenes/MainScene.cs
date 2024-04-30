@@ -17,10 +17,12 @@ namespace TeamProject2
         {
             PrintDialogue();
 
-            switch (MenuChoice("원하시는 행동을 입력해주세요.", 1, 2))
+            switch (MenuChoice("원하시는 행동을 입력해주세요.", 0, 2))
             {
+                case 0:
+                    return SceneType.End;
                 case 1:
-                    break;
+                    return SceneType.Status;
                 case 2:
                     break;
                 default:
@@ -39,6 +41,7 @@ namespace TeamProject2
 
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 전투 시작\n");
+            Console.WriteLine("0. 게임 종료\n");
         }
     }
 }
