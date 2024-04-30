@@ -8,5 +8,8 @@ namespace TeamProject2
 {
     internal class Battle
     {
+        Player status;
+
+        List<Monster> monsters;
     }
 }
