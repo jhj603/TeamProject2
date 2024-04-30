@@ -12,17 +12,10 @@ namespace TeamProject2
 
         Battle battleScnen;
 
-        public static int Choice(int min, int max)
+        void InputError()
         {
-            while (true)
-            {
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= min && choice <= max)
-                {
-                    return choice;
-                }
-                Console.WriteLine("잘못된 입력입니다.");
-                Thread.Sleep(1000);
-            }
+            Console.WriteLine("잘못된 입력입니다.");
+            Thread.Sleep(1000);
         }
 
         public void ShowMainScene()
@@ -40,16 +33,21 @@ namespace TeamProject2
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
 
-                int Choice = GameManager.Choice(1, 2);
+                string userInput = Console.ReadLine();
 
-                switch (Choice)
+                if (userInput == "1")
                 {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
+
+                }
+                else if (userInput == "2")
+                {
+
+                }
+                else
+                {
+                    InputError();
+                }
                 }
             }
         }
     }
-}
