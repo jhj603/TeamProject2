@@ -36,5 +36,17 @@ namespace TeamProject2
             Console.WriteLine($"체  력 : {Hp}");
             Console.WriteLine($"Gold : {Gold}");
         }
+
+        public void ShowDunGeonStatus()
+        {
+            Console.WriteLine("[내정보]");
+            Console.WriteLine($"Lv.{Level} {Name} ({Job})");
+            Console.WriteLine($"HP {Hp}/{Hp}");
+        }
+
+        public void PlayerAttack()
+        {
+            Console.WriteLine($"{Name} 의 공격!");
+        }
     }
 }
