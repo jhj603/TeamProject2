@@ -27,25 +27,7 @@ namespace TeamProject2
 
         public void ShowStatus()
         {
-            // 무한 반복
-
-                // "캐릭터의 정보가 표시됩니다." 까지 문자열 출력
-
-                // 플레이어 필드를 사용해 문자열 생성 후 출력
-
-                // 입력
-
-                    // 0 입력
-
-                        // ShowStatus() 함수 나가기
-
-                    // 0 이외 정수 입력
-                        
-                        // "잘못된 입력입니다." 출력
-                
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
+            // 플레이어 필드를 사용해 문자열 생성 후 출력
         }
 
         public void PlayerAttack(Monster monster)

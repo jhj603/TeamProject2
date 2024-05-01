@@ -13,27 +13,39 @@ namespace TeamProject2
 
         public void ShowMainScene()
         {
-            // 무한 반복
+            if(status == null)  // status == null이면
+            {
+                status = new Player();    // Player 객체 생성
+            }
 
+            while (true)    // 무한 반복
+            {
                 // 게임 시작 화면 출력
+                Console.Clear();
 
-                // 입력
+                Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+                Console.WriteLine("이제 전투를 시작할 수 있습니다.\n");
 
-                    // 1. 상태 보기 입력
+                Console.WriteLine("1. 상태 보기");
+                Console.WriteLine("2. 전투 시작\n");
 
-                        // ShowPlayerStatus() 호출
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine(">>");
+                string input = Console.ReadLine();  // 입력
 
-                    // 2. 전투 시작 입력
-
-                        // GoDungeon() 호출
-
-                    // 1, 2 제외 숫자 입력
-
-                        // "잘못된 입력입니다." 출력
-                
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
+                switch(input)
+                {
+                    case "1":   // 1. 상태 보기 입력
+                        ShowPlayerStatus();    // ShowPlayerStatus() 호출
+                        break;
+                    case "2":   // 2. 전투 시작 입력
+                        GoDungeon();   // GoDungeon() 호출
+                        break;
+                    default:    // 1, 2 제외, 문자 입력 숫자 입력
+                        Program.InputError(); // "잘못된 입력입니다." 출력
+                        break;
+                }
+            }
         }
 
         public void ShowPlayerStatus()
