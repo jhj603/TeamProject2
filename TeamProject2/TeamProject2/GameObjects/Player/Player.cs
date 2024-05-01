@@ -25,9 +25,27 @@ namespace TeamProject2
 
         private int gold = 0;           // 소지금
 
+
+        public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
+        {
+            this.attack = attack;
+            this.hp = hp;
+            this.defense = defense;
+            this.level = level;
+            this.name = name;
+            this.job = job;
+            this.gold = gold;
+        }
+
         public void ShowStatus()
         {
             // 플레이어 필드를 사용해 문자열 생성 후 출력
+            Console.WriteLine($"Lv. {0:D1}{level}");            
+            Console.WriteLine($"{name} ( {job} )");
+            Console.WriteLine($"공격력 : {attack}");
+            Console.WriteLine($"방어력 : {defense}");
+            Console.WriteLine($"체  력 : {hp}");
+            Console.WriteLine($"Gold : {gold} G");      
         }
 
         public void PlayerAttack(Monster monster)
