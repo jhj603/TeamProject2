@@ -16,16 +16,19 @@ namespace TeamProject2
         public int Hp { get; set; }
         public int Gold { get; set; }
 
+        public Player()
+        {
+            Name = "조창일";
+            Job = "전사";
+            Level = 1;
+            Attack = 10;
+            Defense = 5;
+            Hp = 100;
+            Gold = 1500;
+        }
+
         public void ShowStatus()
         {
-            string Name = "조창일";
-            string Job = "전사";
-            int Level = 1;
-            int Attack = 10;
-            int Defense = 5;
-            int Hp = 100;
-            int Gold = 1500;
-
             Console.WriteLine($"Lv. {Level}");
             Console.WriteLine($"{Name} ( {Job} )");
             Console.WriteLine($"공격력 : {Attack}");

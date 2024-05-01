@@ -10,5 +10,11 @@ namespace TeamProject2
 
             gameManager.ShowMainScene();
         }
+
+        public static void InputError()
+        {
+            Console.WriteLine("잘못된 입력입니다.");
+            Thread.Sleep(500);
+        }
     }
 }
