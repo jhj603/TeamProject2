@@ -8,9 +8,14 @@ namespace TeamProject2
 {
     internal class Battle
     {
+        Monster monster = new Monster();
+ 
         public void ShowBattle()
         {
+
             Console.WriteLine("Battle!!");
+            Console.WriteLine(" ");
+            monster.ShowMosterStatus();
         }
 
     }
