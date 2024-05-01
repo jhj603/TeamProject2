@@ -12,8 +12,6 @@ namespace TeamProject2
 
         Battle battle = new Battle();
 
-        Monster monster;
-
         public void ShowMainScene()
         {
             while (true)
@@ -37,7 +35,7 @@ namespace TeamProject2
                 }
                 else if (userInput == "2")
                 {
-                    battle.ShowBattle();
+                    
                 }
                 else
                 {
@@ -73,12 +71,6 @@ namespace TeamProject2
                     Program.InputError();
                 }
             }
-        }
-        public void GoDungeon()
-        {
-            Console.Clear();
-
-            Console.WriteLine("Battle!!");
         }
     }
 }
