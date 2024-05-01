@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace TeamProject2
 {
-    internal class BattleScene
+    internal class Battle
     {
+        public void ShowBattle()
+        {
+            Console.WriteLine("Battle!!");
+        }
+
     }
 }

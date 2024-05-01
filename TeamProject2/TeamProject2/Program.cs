@@ -4,9 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
-            int a = 10;
+            GameManager gamemanager = new GameManager();
+            gamemanager.ShowMainScene();
         }
     }
 }
