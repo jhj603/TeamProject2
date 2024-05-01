@@ -25,6 +25,8 @@ namespace TeamProject2
 
         private int gold = 0;           // 소지금
 
+        private int maxhp = 0;          // 최대 HP
+
 
         public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
         {
@@ -35,6 +37,7 @@ namespace TeamProject2
             this.name = name;
             this.job = job;
             this.gold = gold;
+            this.maxhp = hp;
         }
 
         public void ShowStatus()
@@ -58,8 +61,8 @@ namespace TeamProject2
 
         public void ShowDungeonStatus()
         {
-            // 레벨, 이름, 직업으로 문자열 생성 후 출력
-            // HP로 문자열 생성 후 출력
+            Console.WriteLine($"Lv. {level} {name} ({job})");            // 레벨, 이름, 직업으로 문자열 생성 후 출력
+            Console.WriteLine($"HP {hp}/{maxhp}");                       // HP로 문자열 생성 후 출력
         }
     }
 }
