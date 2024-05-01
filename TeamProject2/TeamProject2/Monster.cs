@@ -12,5 +12,13 @@ namespace TeamProject2
         public int Level { get; set; }
         public int Attack { get; set; }
         public int Hp { get; set; }
+
+        public Monster(int level, string name, int hp, int attak)
+        {
+            Level = level;
+            Name = name;
+            Hp = hp;
+            Attack = attak;
+        }
     }
 }
