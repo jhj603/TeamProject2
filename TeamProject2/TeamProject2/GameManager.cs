@@ -8,14 +8,12 @@ namespace TeamProject2
 {
     internal class GameManager
     {
-        Player status;
+        Player player = new Player();
 
-        Battle battleScnen;
-
-        void InputError()
+        public void InputError()
         {
             Console.WriteLine("잘못된 입력입니다.");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
 
         public void ShowMainScene()
@@ -37,7 +35,7 @@ namespace TeamProject2
 
                 if (userInput == "1")
                 {
-
+                    ShowPlayerStatus();
                 }
                 else if (userInput == "2")
                 {
@@ -47,7 +45,34 @@ namespace TeamProject2
                 {
                     InputError();
                 }
+            }
+        }
+        public void ShowPlayerStatus()
+        {
+            while(true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("상태 보기");
+                Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+                Console.WriteLine("");
+                player.ShowStatus();
+                Console.WriteLine("");
+                Console.WriteLine("0. 나가기");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+
+                string userinput = Console.ReadLine();
+
+                if (userinput == "0")
+                {
+                    ShowMainScene();
+                }
+                else
+                {
+                    InputError();
                 }
             }
         }
     }
+}
