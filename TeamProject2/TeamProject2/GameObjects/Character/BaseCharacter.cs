@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,8 @@ namespace TeamProject2
 
         public CharacterState CurrentState { get; private set; }
 
+        public int CurrentDamage { get; private set; }
+
         Random? rand;
 
         public abstract void PrintStatus();
@@ -42,10 +45,15 @@ namespace TeamProject2
         public void AttackTarget(BaseCharacter target)
         {
             int error = (int)Math.Ceiling(Attack * 0.1f);
-            target.HP -= rand.Next(Attack - error, Attack + error);
+            CurrentDamage = rand.Next(Attack - error, Attack + error);
+
+            target.HP -= CurrentDamage;
 
             if (0 >= target.HP)
+            {
                 target.CurrentState = CharacterState.Dead;
+                target.HP = 0;
+            }   
         }
     }
 }

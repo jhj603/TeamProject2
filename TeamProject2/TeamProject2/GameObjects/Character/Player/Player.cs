@@ -18,6 +18,8 @@ namespace TeamProject2
     {
         public PlayerJob Job { get; private set; }
         public int Defense { get; private set; }
+        public int MaxHP { get; private set; }
+        public int CurrentDungeon { get; private set; } = 1;
 
         // Player 필드 초기화 함수
         public void Initialize(int level, string name, PlayerJob job, int attack, int defense, int hp, int gold)        // 레벨, 이름, 직업, 공격력, 방어력, hp, 소지금을 차례로 받아 초기화에 사용
@@ -26,9 +28,9 @@ namespace TeamProject2
 
             Job = job;                                              // 자식 클래스(Player)만 갖고 있는 필드 초기화
             Defense = defense;                                      // 자식 클래스(Player)만 갖고 있는 필드 초기화
+            MaxHP = hp;
         }
         
-        // 플레이어 상태 보기 - 손두혁
         public override void PrintStatus()
         {
             Console.WriteLine($"Lv. {Level}");
@@ -51,6 +53,26 @@ namespace TeamProject2
             Console.WriteLine($"방어력 : {Defense}");
             Console.WriteLine($"체  력 : {HP}");
             Console.WriteLine($"Gold   : {Gold}");
+        }
+
+        public void PrintDungeonStatus()
+        {
+            Console.Write($"Lv.{Level} {Name} ( ");
+
+            switch (Job)
+            {
+                case PlayerJob.Warrior:
+                    Console.WriteLine("전사 )");
+                    break;
+                case PlayerJob.Magician:
+                    Console.WriteLine("마법사 )");
+                    break;
+                case PlayerJob.Archer:
+                    Console.WriteLine("궁수 )");
+                    break;
+            }
+
+            Console.WriteLine($"HP {HP} / {MaxHP}");
         }
     }
 }

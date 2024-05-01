@@ -10,7 +10,8 @@ namespace TeamProject2
     {
         Minion,
         VoidInsect,
-        SiegeMinion
+        SiegeMinion,
+        MonsterTypeEnd
     }
 
     internal class Monster : BaseCharacter

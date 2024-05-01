@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,10 @@ namespace TeamProject2
 {
     internal class GameManager
     {
-        Player? player; // Player player = null;
+        Player? player = null; 
+        Scene? scene = null;
 
-        Scene? scene;
-
-        Dictionary<SceneType, Scene>? sceneDict;
+        Dictionary<SceneType, Scene>? sceneDict = null;
 
         SceneType currentScene = SceneType.Start;
         SceneType changeScene = SceneType.Create;

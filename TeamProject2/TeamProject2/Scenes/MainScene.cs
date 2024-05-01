@@ -24,7 +24,15 @@ namespace TeamProject2
                 case 1:
                     return SceneType.Status;
                 case 2:
-                    break;
+                    if (CharacterState.Dead == player.CurrentState)
+                    {
+                        Console.WriteLine("\n죽었습니다..!");
+
+                        Thread.Sleep(1000);
+
+                        return SceneType.NoChange;
+                    }
+                    return SceneType.Battle;
                 default:
                     break;
             }
