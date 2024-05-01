@@ -15,17 +15,22 @@ namespace TeamProject2
 
     internal abstract class BaseCharacter
     {
-        public int Level { get; set; }          // 레벨
-        public string? Name { get; set; }       // 이름
-        public int Attack { get; set; }         // 공격력
-        public int HP { get; set; }             // HP
-        public int Gold { get; set; }           // 소지금
+        public int Level { get; protected set; }          // 레벨
+        public string? Name { get; protected set; } = null;       // 이름
+        public int Attack { get; protected set; }         // 공격력
+        public int HP { get; protected set; }             // HP
+        public int Gold { get; protected set; }           // 소지금
 
-        public CharacterState CurrentState { get; private set; }
+        public CharacterState CurrentState { get; protected set; }
 
-        public int CurrentDamage { get; private set; }
+        public int CurrentDamage { get; protected set; }
 
-        Random? rand;
+        public bool IsCritical { get; protected set; } = false;
+
+        protected Random? rand = null;
+
+        int percent = 0;
+        int error = 0;
 
         public abstract void PrintStatus();
 
@@ -44,16 +49,44 @@ namespace TeamProject2
 
         public void AttackTarget(BaseCharacter target)
         {
-            int error = (int)Math.Ceiling(Attack * 0.1f);
-            CurrentDamage = rand.Next(Attack - error, Attack + error);
+            IsCritical = false;
 
-            target.HP -= CurrentDamage;
+            percent = rand.Next(0, 100);
 
-            if (0 >= target.HP)
+            if (15 > percent)
             {
-                target.CurrentState = CharacterState.Dead;
-                target.HP = 0;
-            }   
+                IsCritical = true;
+
+                CurrentDamage = (int)(Attack * 1.6f);
+            }
+            else
+            {
+                error = (int)Math.Ceiling(Attack * 0.1f);
+                CurrentDamage = rand.Next(Attack - error, Attack + error);
+            }
+
+            target.Hit(CurrentDamage);
+        }
+
+        public void Hit(int attack)
+        {
+            HP -= attack;
+
+            if (0 >= HP)
+            {
+                CurrentState = CharacterState.Dead;
+                HP = 0;
+            }
+        }
+        
+        public bool IsDodge()
+        {
+            percent = rand.Next(0, 100);
+
+            if (10 > percent)
+                return true;
+
+            return false;
         }
     }
 }

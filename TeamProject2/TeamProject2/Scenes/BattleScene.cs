@@ -146,8 +146,16 @@ namespace TeamProject2
                     }
                     else
                     {
-                        PlayerAttack(playerChoice - 1);
-                        return;
+                        if (monsters[playerChoice - 1].IsDodge())
+                        {
+                            PrintMonsterDodge(monsters[playerChoice - 1]);
+                            return;
+                        }
+                        else
+                        {
+                            PlayerAttack(playerChoice - 1);
+                            return;
+                        }
                     }
                 }
                 else if (0 == playerChoice)
@@ -178,6 +186,13 @@ namespace TeamProject2
             {
                 if (CharacterState.Alive == monsters[i].CurrentState)
                 {
+                    if (player.IsDodge())
+                    {
+                        PrintPlayerDodge(monsters[i]);
+                        ++i;
+                        continue;
+                    }
+
                     playerHP = player.HP;
 
                     monsters[i].AttackTarget(player);
@@ -242,7 +257,12 @@ namespace TeamProject2
 
             Console.WriteLine($"{player.Name} 의 공격!");
             Console.Write($"Lv.{monster.Level} {monster.Name} 을(를) 맞췄습니다!");
-            Console.WriteLine($"[데미지 : {player.CurrentDamage}]\n");
+            Console.Write($"[데미지 : {player.CurrentDamage}]");
+
+            if (player.IsCritical)
+                Console.WriteLine(" - 치명타 공격!!\n");
+            else
+                Console.WriteLine("\n");
 
             Console.WriteLine($"Lv.{monster.Level} {monster.Name}");
             Console.Write($"HP {preHP} -> ");
@@ -262,7 +282,12 @@ namespace TeamProject2
             Console.WriteLine("Battle!!\n");
 
             Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
-            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {monster.CurrentDamage}]\n");
+            Console.Write($"{player.Name} 을(를) 맞췄습니다. [데미지 : {monster.CurrentDamage}]");
+
+            if (monster.IsCritical)
+                Console.WriteLine(" - 치명타 공격!!\n");
+            else
+                Console.WriteLine("\n");
 
             Console.WriteLine($"Lv.{player.Level} {player.Name}");
             Console.WriteLine($"HP {preHP} -> {player.HP}\n");
@@ -303,6 +328,42 @@ namespace TeamProject2
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {prePlayerHP} -> {player.HP}\n");
+
+                Console.WriteLine("0. 다음");
+
+                if (0 == MenuChoice("", 0, 0))
+                    return;
+            }
+        }
+
+        void PrintMonsterDodge(Monster monster)
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!\n");
+
+                Console.WriteLine($"{player.Name} 의 공격!");
+                Console.Write($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
+                
+                Console.WriteLine("0. 다음");
+
+                if (0 == MenuChoice("", 0, 0))
+                    return;
+            }
+        }
+
+        void PrintPlayerDodge(Monster monster)
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!\n");
+
+                Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
+                Console.WriteLine($"{player.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
 
                 Console.WriteLine("0. 다음");
 

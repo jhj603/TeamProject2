@@ -30,7 +30,7 @@ namespace TeamProject2
             Defense = defense;                                      // 자식 클래스(Player)만 갖고 있는 필드 초기화
             MaxHP = hp;
         }
-        
+
         public override void PrintStatus()
         {
             Console.WriteLine($"Lv. {Level}");
