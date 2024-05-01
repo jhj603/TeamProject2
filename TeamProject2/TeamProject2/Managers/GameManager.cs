@@ -16,7 +16,7 @@ namespace TeamProject2
             // status == null이면
                 
                 // Player 객체 생성
-            
+
             // 무한 반복
 
                 // 게임 시작 화면 출력
@@ -42,27 +42,40 @@ namespace TeamProject2
 
         public void ShowPlayerStatus()
         {
-            // 무한 반복
-                
-                // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
+            while (true)                                               // 무한 반복
+            {
+                Console.Clear();
 
-                // Player.ShowStatus() 호출
+                Console.WriteLine("상태 보기");                        // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
+                Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
 
-                // 상태 보기 화면(나머지) 출력
+                status.ShowStatus();                                   // Player.ShowStatus() 호출
 
-                // 입력
+                Console.WriteLine("\n0. 나가기\n");                    // 상태 보기 화면(나머지) 출력
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
 
-                    // 0. 입력
-                        
-                        // ShowMainScene()으로 돌아가기
+                string input = Console.ReadLine();                     // 입력
+                int num;
 
-                    // 0 제외 숫자 입력
-                        
-                        // "잘못된 입력입니다." 출력
-
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
+                if (int.TryParse(input, out num))                      
+                {
+                    if (num == 0)                                      // 0. 입력
+                    {
+                        return;                                        // ShowMainScene()으로 돌아가기
+                    }
+                    else                                               // 0 제외 숫자 입력
+                    {
+                        Console.WriteLine("잘못된 입력입니다.");       // "잘못된 입력입니다." 출력
+                        Thread.Sleep(1000);
+                    }
+                }
+                else                                                   // 문자 입력
+                {
+                    Console.WriteLine("잘못된 입력입니다.");           // "잘못된 입력입니다." 출력
+                    Thread.Sleep(1000);
+                }
+            }   
         }
 
         public void GoDungeon()
