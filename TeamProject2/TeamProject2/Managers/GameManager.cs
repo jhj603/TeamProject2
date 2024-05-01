@@ -13,6 +13,7 @@ namespace TeamProject2
 
         public void ShowMainScene()
         {
+
             if(status == null)  // status == null이면
             {
                 status = new Player();    // Player 객체 생성
@@ -88,17 +89,22 @@ namespace TeamProject2
 
         public void GoDungeon()
         {
-            // Battle == null이면
-                
-                // Battle 객체 생성
+            if (battleScene == null) // Battle == null이면
+                battleScene = new BattleScene(); // Battle 객체 생성
 
-            // Battle.MonsterSpawn() 수행이 실패하면
-
+            if (battleScene.MonsterSpawn() == false) // Battle.MonsterSpawn() 수행이 실패하면
+            {
                 // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
+                Console.WriteLine("error");
+                ShowMainScene();
+            }
 
-            // Battle.MonsterSpawn() 수행이 성공하면
-
+            else// Battle.MonsterSpawn() 수행이 성공하면
+            {
                 // Battle.ShowBattle() 수행
+                battleScene.ShowBattle();
+            }
+
         }
     }
 }
