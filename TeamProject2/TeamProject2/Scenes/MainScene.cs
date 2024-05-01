@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamProject2.Scenes
+namespace TeamProject2
 {
     internal class MainScene
     {
