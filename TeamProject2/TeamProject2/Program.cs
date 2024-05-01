@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            GameManager gameManager = new GameManager();        // GameManager 객체 생성
 
-            int a = 10;
+            gameManager.ShowMainScene();        // GameManager의 ShowMainScene() 함수 수행
         }
     }
 }
