@@ -13,6 +13,10 @@ namespace TeamProject2
 
         public void ShowMainScene()
         {
+            // status == null이면
+                
+                // Player 객체 생성
+            
             // 무한 반복
 
                 // 게임 시작 화면 출력
