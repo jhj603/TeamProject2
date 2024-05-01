@@ -13,67 +13,76 @@ namespace TeamProject2
 
         public void ShowMainScene()
         {
+            // status == null이면
+
+            // Player 객체 생성
+
             // 무한 반복
 
-                // 게임 시작 화면 출력
+            // 게임 시작 화면 출력
 
-                // 입력
+            // 입력
 
-                    // 1. 상태 보기 입력
+            // 1. 상태 보기 입력
 
-                        // ShowPlayerStatus() 호출
+            // ShowPlayerStatus() 호출
 
-                    // 2. 전투 시작 입력
+            // 2. 전투 시작 입력
 
-                        // GoDungeon() 호출
+            // GoDungeon() 호출
 
-                    // 1, 2 제외 숫자 입력
+            // 1, 2 제외 숫자 입력
 
-                        // "잘못된 입력입니다." 출력
-                
-                // 문자 입력
+            // "잘못된 입력입니다." 출력
 
-                    // "잘못된 입력입니다." 출력
+            // 문자 입력
+
+            // "잘못된 입력입니다." 출력
         }
 
         public void ShowPlayerStatus()
         {
             // 무한 반복
-                
-                // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
 
-                // Player.ShowStatus() 호출
+            // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
 
-                // 상태 보기 화면(나머지) 출력
+            // Player.ShowStatus() 호출
 
-                // 입력
+            // 상태 보기 화면(나머지) 출력
 
-                    // 0. 입력
-                        
-                        // ShowMainScene()으로 돌아가기
+            // 입력
 
-                    // 0 제외 숫자 입력
-                        
-                        // "잘못된 입력입니다." 출력
+            // 0. 입력
 
-                // 문자 입력
+            // ShowMainScene()으로 돌아가기
 
-                    // "잘못된 입력입니다." 출력
+            // 0 제외 숫자 입력
+
+            // "잘못된 입력입니다." 출력
+
+            // 문자 입력
+
+            // "잘못된 입력입니다." 출력
         }
 
         public void GoDungeon()
         {
-            // Battle == null이면
-                
-                // Battle 객체 생성
+            if (battleScene == null) // Battle == null이면
+                battleScene = new BattleScene(); // Battle 객체 생성
 
-            // Battle.MonsterSpawn() 수행이 실패하면
-
+            if (battleScene.MonsterSpawn() == false) // Battle.MonsterSpawn() 수행이 실패하면
+            {
                 // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
+                Console.WriteLine("error");
+                ShowMainScene();
+            }
 
-            // Battle.MonsterSpawn() 수행이 성공하면
-
+            else// Battle.MonsterSpawn() 수행이 성공하면
+            {
                 // Battle.ShowBattle() 수행
+                battleScene.ShowBattle();
+            }
+
         }
     }
 }

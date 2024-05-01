@@ -13,7 +13,7 @@ namespace TeamProject2
 
         int startHP = 0;                    // 배틀 시작 시 플레이어의 hp
 
-        bool MonsterSpawn()
+        public bool MonsterSpawn()
         {
             // 몬스터 객체들을 모아놓는 리스트 monsters 객체 생성
 
@@ -156,7 +156,7 @@ namespace TeamProject2
                     // "잘못된 입력입니다." 출력
         }
 
-        void ShowBattle()
+        public void ShowBattle()
         {
             // startHP에 현재 플레이어의 hp 저장
 
