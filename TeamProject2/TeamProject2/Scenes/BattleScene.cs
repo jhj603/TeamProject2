@@ -345,7 +345,7 @@ namespace TeamProject2
                 Console.WriteLine("Battle!!\n");
 
                 Console.WriteLine($"{player.Name} 의 공격!");
-                Console.Write($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
+                Console.WriteLine($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
 
                 Console.WriteLine("0. 다음");
 
