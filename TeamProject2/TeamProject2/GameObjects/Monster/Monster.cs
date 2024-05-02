@@ -13,7 +13,7 @@ namespace TeamProject2
 
         private int attack = 0;
 
-        private int hp = 0;
+        private int hp { get; set; }
 
         private int level = 0;
 

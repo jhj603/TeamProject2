@@ -11,21 +11,21 @@ namespace TeamProject2
         // private으로 접근 제한해놨으므로
         // Player 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
 
-        private int attack = 0;         // 공격력
+        private int attack { get; set; }   // 공격력
 
-        private int hp = 0;             // HP
+        private int hp = 0;                // HP
 
-        private int defense = 0;        // 방어력
+        private int defense = 0;           // 방어력
 
-        private int level = 0;          // 레벨
+        private int level = 0;             // 레벨
 
-        private string name = null;     // 이름
+        private string name = null;        // 이름
 
-        private string job = null;      // 직업
+        private string job = null;         // 직업
 
-        private int gold = 0;           // 소지금
-
-        private int maxhp = 0;          // 최대 HP
+        private int gold = 0;              // 소지금
+        
+        private int maxhp = 0;             // 최대 HP
 
 
         public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
@@ -54,7 +54,7 @@ namespace TeamProject2
         public void PlayerAttack(Monster monster)
         {
             // monster의 hp에서 player의 attack을 뺌
-
+            
             // monster의 hp가 0 이하라면
                 // monster의 hp = 0
         }
