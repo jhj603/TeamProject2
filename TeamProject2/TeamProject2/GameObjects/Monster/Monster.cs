@@ -51,10 +51,13 @@ namespace TeamProject2
 
         void MonsterAttack(Player player)
         {
-            // player hp에서 monster의 attack을 뺌
+            player.Hp -= attack;    // player hp에서 monster의 attack을 뺌
 
-            // player의 hp가 0 이하라면
-                // player의 hp = 0      
+            if(player.Hp <= 0)    // player의 hp가 0 이하라면
+            {
+                player.Hp = 0;    // player의 hp = 0     
+            }
+
         }
 
         public void ShowMonsterStatus()
