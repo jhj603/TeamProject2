@@ -74,7 +74,7 @@ namespace TeamProject2
             {
                 // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
                 Console.WriteLine("error");
-                ShowMainScene();
+                return;
             }
 
             else// Battle.MonsterSpawn() 수행이 성공하면
