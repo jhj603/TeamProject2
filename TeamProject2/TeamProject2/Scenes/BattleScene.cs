@@ -168,27 +168,37 @@ namespace TeamProject2
         void PlayerLose()
         {
             // 무한 반복
-
+            while (true)
+            {
                 // "You Lose" 까지 문자열 출력
-
+                Console.WriteLine("Battle - Result\n");
+                Console.WriteLine("You Lose\n");
                 // player의 레벨, 이름 으로 문자열 생성 후 출력
+                Console.WriteLine($"Lv.{status.Level} {status.Name}");
                 // starthHp와 player의 hp로 문자열 생성 후 출력
-
+                Console.WriteLine($"HP {startHP} -> {status.Hp}\n");
                 // 나머지 문자열 출력
+                Console.WriteLine("0. 다음");
 
-                // 입력
+                string input = Console.ReadLine();                     // 입력
+                int num;
 
-                    // 0. 입력
-
-                        // PlayerLose() 함수 나가기
-
-                    // 0 제외 숫자 입력
-
-                        // "잘못된 입력입니다." 출력
-
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
+                if (int.TryParse(input, out num))
+                {
+                    if (num == 0)                                      // 0. 입력
+                    {
+                        return;                                        // PlayerLose() 함수 나가기
+                    }
+                    else                                               // 0 제외 숫자 입력
+                    {
+                        Program.InputError();                          // "잘못된 입력입니다." 출력
+                    }
+                }
+                else                                                   // 문자 입력
+                {
+                    Program.InputError();                              // "잘못된 입력입니다." 출력
+                }
+            }
         }
 
         public void ShowBattle()
