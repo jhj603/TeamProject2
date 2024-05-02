@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -239,38 +240,57 @@ namespace TeamProject2
         bool ShowMonsterChoice()
         {
             // 무한 반복
-
+            while (true)
+            {
                 // "Battle!!" 문자열 출력
+                Console.WriteLine("Battle!!");
 
                 // monsters의 크기만큼 반복
-                
+                for (int i = 0; i < monsters.Count; i++)
+                {
                     // Monster.ShowMonsterStatus() 호출
+                    monsters[i].ShowMonsterStatus();
+                }
 
                 // "[내정보]" 출력
+                Console.WriteLine("[내정보]");
 
                 // Player.ShowDungeonStatus() 호출
+                status.ShowDungeonStatus();
 
                 // 나머지 문자열 출력
+                Console.WriteLine("0. 취소\n");
+                Console.WriteLine("대상을 선택해주세요.\n");
+                Console.Write(">> ");
 
-                // 입력
+                string input = Console.ReadLine();                               // 입력
+                int num;
 
-                    // 1부터 monsters의 크기 사이의 정수 입력
-
-                        // Battle.MonsterHit(monster) 수행 후 반환 값이 true일 경우
-
-                            // Battle.PlayerVictory 수행 후 true 반환
-
-                        // Battle.PlayerHit(monster) 수행 후 반환 값이 true일 경우
-
-                            // Battle.PlayerLose 수행 후 true 반환
-
-                    // 1부터 monsters의 크기 제외 숫자 입력
-
-                        // "잘못된 입력입니다." 출력
-
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
+                if (int.TryParse(input, out num))
+                {
+                    if (num > 0 && num <= monsters.Count)                       // 1부터 monsters의 크기 사이의 정수 입력
+                    {
+                        if (MonsterHit(monsters[num - 1]) == true)              // Battle.MonsterHit(monster) 수행 후 반환 값이 true일 경우
+                        {
+                            PlayerVictory();                                    // Battle.PlayerVictory 수행 후 true 반환
+                            return true;
+                        }
+                        else                                                    // Battle.PlayerHit(monster) 수행 후 반환 값이 true일 경우 //????
+                        {
+                            PlayerLose();                                       // Battle.PlayerLose 수행 후 true 반환
+                            return true;
+                        }
+                    }
+                    else                                                        // 1부터 monsters의 크기 제외 숫자 입력
+                    {
+                        Program.InputError();                                       // "잘못된 입력입니다." 출력
+                    }
+                }
+                else                                                            // 문자 입력
+                {
+                    Program.InputError();                                       // "잘못된 입력입니다." 출력
+                }
+            }
 
             return false;   // bool을 반환 타입으로 갖는 함수는 항상 bool 값을 반환해야 함
         }
