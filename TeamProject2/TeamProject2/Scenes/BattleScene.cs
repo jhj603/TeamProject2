@@ -112,29 +112,42 @@ namespace TeamProject2
         bool PlayerHit(Monster monster)
         {
             // 변수를 만들어서 현재 player의 HP 저장
-
+            int nowPlayerHp = status.Hp;
             // Monster.MonsterAttack(player) 수행
-
+            monsters[int.Parse(monster.Name)].MonsterAttack(status);
             // 무한 반복
-
+            while (true)
+            {
                 // "Battle!!" 출력
-
+                Console.WriteLine("Battle!!\n");
+                // 몬스터의 레벨, 이름을 문자열 생성 후 출력
+                Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
                 // 플레이어의 이름, 몬스터의 데미지로 문자열 생성 후 출력
+                Console.WriteLine($"{status.Name}을(를) 맞췄습니다. [데미지 : {monster.Attack}]\n");
+                Console.WriteLine($"Lv.{status.Level} {status.Name}");
+                Console.WriteLine($"HP {nowPlayerHp} -> {status.Hp}\n");
+                Console.WriteLine("0. 다음\n");
+                Console.Write(">> ");
 
-                // 입력
+                string input = Console.ReadLine();                     // 입력
+                int num;
 
-                    // 0. 입력
-
-                        // true 반환
-
-                    // 0 제외 숫자 입력
-
-                        // "잘못된 입력입니다." 출력
-
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
-
+                if (int.TryParse(input, out num))
+                {
+                    if (num == 0)                                      // 0. 입력
+                    {
+                        return true;                                   // true 반환
+                    }
+                    else                                               // 0 제외 숫자 입력
+                    {
+                        Program.InputError();                          // "잘못된 입력입니다." 출력
+                    }
+                }
+                else                                                   // 문자 입력
+                {
+                    Program.InputError();                              // "잘못된 입력입니다." 출력
+                }
+            }
             return false;
         }        
 
