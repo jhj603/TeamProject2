@@ -20,7 +20,7 @@ namespace TeamProject2
 
         public Monster(int level, MonsterType type, string name, int attack, int hp)
         {
-            base.Initialize(level, name, attack, hp, 0);
+            base.Initialize(level, name, attack, hp, 0, 0);
 
             monsterType = type;
         }

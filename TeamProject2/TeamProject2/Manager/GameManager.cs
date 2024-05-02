@@ -9,6 +9,8 @@ namespace TeamProject2
 {
     internal class GameManager
     {
+        private static GameManager Instance = null;
+
         Player? player = null; 
         Scene? scene = null;
 
@@ -16,6 +18,19 @@ namespace TeamProject2
 
         SceneType currentScene = SceneType.Start;
         SceneType changeScene = SceneType.Create;
+
+        private GameManager()
+        {
+
+        }
+
+        public static GameManager GetInstance()
+        {
+            if (null == Instance)
+                Instance = new GameManager();
+
+            return Instance;
+        }
 
         public bool Initialize()        // 객체의 초기화 담당 함수
         {

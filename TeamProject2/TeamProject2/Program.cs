@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            GameManager gameManager = new GameManager();
+            GameManager gameManager = GameManager.GetInstance();
 
             if (gameManager.Initialize())
                 gameManager.Update();

@@ -34,13 +34,13 @@ namespace TeamProject2
             switch (inputJob)
             {
                 case PlayerJob.Warrior:
-                    player.Initialize(1, nameInput, inputJob, 8, 10, 100, 1500);
+                    player.Initialize(1, nameInput, inputJob, 8, 10, 100, 1500, 50);
                     return SceneType.Main;
                 case PlayerJob.Magician:
-                    player.Initialize(1, nameInput, inputJob, 15, 3, 100, 1500);
+                    player.Initialize(1, nameInput, inputJob, 15, 3, 100, 1500, 50);
                     return SceneType.Main;
                 case PlayerJob.Archer:
-                    player.Initialize(1, nameInput, inputJob, 10, 5, 100, 1500);
+                    player.Initialize(1, nameInput, inputJob, 10, 5, 100, 1500, 50);
                     return SceneType.Main;
                 default:
                     return SceneType.NoChange;

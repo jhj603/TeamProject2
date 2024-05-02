@@ -21,6 +21,8 @@ namespace TeamProject2
         public int HP { get; protected set; }             // HP
         public int Gold { get; protected set; }           // 소지금
 
+        public int MP { get; protected set; }
+
         public CharacterState CurrentState { get; protected set; }
 
         public int CurrentDamage { get; protected set; }
@@ -34,13 +36,14 @@ namespace TeamProject2
 
         public abstract void PrintStatus();
 
-        public void Initialize(int level, string name, int attack, int hp, int gold)        // 위 필드들을 초기화하는 함수
+        public void Initialize(int level, string name, int attack, int hp, int gold, int mp)        // 위 필드들을 초기화하는 함수
         {
             Level = level;
             Name = name;
             Attack = attack;
             HP = hp;
             Gold = gold;
+            MP = mp;
 
             CurrentState = CharacterState.Alive;
 

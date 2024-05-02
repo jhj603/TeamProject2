@@ -88,27 +88,67 @@ namespace TeamProject2
         {
             PrintDialogue();
 
-            if (1 == MenuChoice("원하시는 행동을 입력해주세요.", 1, 1))
+            switch (MenuChoice("원하시는 행동을 입력해주세요.", 1, 2))
             {
-                while (true)
-                {
-                    ChoiceMonster();
-
-                    if (IsPlayerWin())
-                    {
-                        PrintPlayerVictory();
+                case 1:
+                    if (NormalAttack())
                         return SceneType.Main;
-                    }
-
-                    if (EnemyPhase())
-                    {
-                        PrintPlayerLose();
+                    break;
+                case 2:
+                    if (SkillAttack())
                         return SceneType.Main;
-                    }
-                }
+                    break;
             }
 
             return SceneType.NoChange;
+        }
+
+        bool NormalAttack()
+        {
+            while (true)
+            {
+                ChoiceMonster();
+
+                if (IsPlayerWin())
+                {
+                    PrintPlayerVictory();
+                    return true;
+                }
+
+                if (EnemyPhase())
+                {
+                    PrintPlayerLose();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        bool SkillAttack()
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!");
+                Console.WriteLine("");
+
+                for (int i = 0; i < monsters.Count; ++i)
+                {
+                    Console.Write($"[{i + 1}] ");
+                    monsters[i].PrintStatus();
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("[내정보]\n");
+
+                player.PrintDungeonStatus();
+
+                Console.WriteLine("");
+                Console.WriteLine("0. 취소");
+                Console.WriteLine("");
+            }
         }
 
         private void ChoiceMonster()
@@ -246,6 +286,7 @@ namespace TeamProject2
 
             Console.WriteLine("");
             Console.WriteLine("1. 공격");
+            Console.WriteLine("2. 스킬");
             Console.WriteLine("");
         }
 
