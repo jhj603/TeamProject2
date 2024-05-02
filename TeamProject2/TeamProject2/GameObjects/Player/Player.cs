@@ -16,6 +16,16 @@ namespace TeamProject2
             get { return attack; }
             set { attack = value; }
         }
+        public int Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
+        public int Hp
+        {
+            get { return hp; }
+            set { hp = value; }
+        }
         public string Name
         {
             get { return name; }
