@@ -146,8 +146,16 @@ namespace TeamProject2
                     }
                     else
                     {
-                        PlayerAttack(playerChoice - 1);
-                        return;
+                        if (monsters[playerChoice - 1].IsDodge())
+                        {
+                            PrintMonsterDodge(monsters[playerChoice - 1]);
+                            return;
+                        }
+                        else
+                        {
+                            PlayerAttack(playerChoice - 1);
+                            return;
+                        }
                     }
                 }
                 else if (0 == playerChoice)
@@ -178,6 +186,13 @@ namespace TeamProject2
             {
                 if (CharacterState.Alive == monsters[i].CurrentState)
                 {
+                    if (player.IsDodge())
+                    {
+                        PrintPlayerDodge(monsters[i]);
+                        ++i;
+                        continue;
+                    }
+
                     playerHP = player.HP;
 
                     monsters[i].AttackTarget(player);

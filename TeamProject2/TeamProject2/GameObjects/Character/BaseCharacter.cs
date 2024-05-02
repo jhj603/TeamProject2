@@ -78,5 +78,15 @@ namespace TeamProject2
                 HP = 0;
             }
         }
+
+        public bool IsDodge()
+        {
+            percent = rand.Next(0, 100);
+
+            if (10 > percent)
+                return true;
+
+            return false;
+        }
     }
 }
