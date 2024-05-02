@@ -146,16 +146,8 @@ namespace TeamProject2
                     }
                     else
                     {
-                        if (monsters[playerChoice - 1].IsDodge())
-                        {
-                            PrintMonsterDodge(monsters[playerChoice - 1]);
-                            return;
-                        }
-                        else
-                        {
-                            PlayerAttack(playerChoice - 1);
-                            return;
-                        }
+                        PlayerAttack(playerChoice - 1);
+                        return;
                     }
                 }
                 else if (0 == playerChoice)
@@ -186,13 +178,6 @@ namespace TeamProject2
             {
                 if (CharacterState.Alive == monsters[i].CurrentState)
                 {
-                    if (player.IsDodge())
-                    {
-                        PrintPlayerDodge(monsters[i]);
-                        ++i;
-                        continue;
-                    }
-
                     playerHP = player.HP;
 
                     monsters[i].AttackTarget(player);
@@ -346,7 +331,7 @@ namespace TeamProject2
 
                 Console.WriteLine($"{player.Name} 의 공격!");
                 Console.Write($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.");
-                
+
                 Console.WriteLine("0. 다음");
 
                 if (0 == MenuChoice("", 0, 0))
