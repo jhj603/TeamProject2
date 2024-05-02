@@ -16,12 +16,24 @@ namespace TeamProject2
             get { return hp; }
             set { hp = value; }
         }
+        public int Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
         private int attack = 0;
 
         private int hp = 0;
 
         private int level = 0;
+
+        private int maxhp = 0;
 
         private string name = null;
 

@@ -59,29 +59,52 @@ namespace TeamProject2
         bool MonsterHit(Monster monster)
         {
             // 변수를 만들어서 현재 monster의 HP 저장
-
+            int nowMonsterHp = monster.Hp;
             // Player.PlayerAttack(monster) 수행
-
+            status.PlayerAttack(monster);
             // 무한 반복
-
+            while (true)
+            {
                 // "Battle!!" 출력
-
+                Console.WriteLine("Battle!!\n");
+                // 플레이어의 이름을 문자열 생성 후 출력
+                Console.WriteLine($"{status.Name}의 공격");
                 // 몬스터의 레벨, 이름, 플레이어의 데미지로 문자열 생성 후 출력
+                Console.WriteLine($"Lv. {monster.Level} {monster.Name}을(를) 맞췄습니다. [데미지 : {status.Attack}]\n");
+                // 몬스터의 레벨, 이름을 문자열 생성 후 출력
+                Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
 
-                // 입력
+                if (monster.Hp == 0)
+                {
+                    Console.WriteLine($"HP {nowMonsterHp} -> Dead\n");
+                }
+                else
+                {
+                    Console.WriteLine($"HP {nowMonsterHp} -> {monster.Hp}\n");
+                }
 
-                    // 0. 입력
+                Console.WriteLine("0. 다음\n");
+                Console.Write(">> ");
 
-                        // true 반환
+                string input = Console.ReadLine();                     // 입력
+                int num;
 
-                    // 0 제외 숫자 입력
-                          
-                        // "잘못된 입력입니다." 출력
-                
-                // 문자 입력
-                    
-                    // "잘못된 입력입니다." 출력
-
+                if (int.TryParse(input, out num))
+                {
+                    if (num == 0)                                      // 0. 입력
+                    {
+                        return true;                                   // true 반환
+                    }
+                    else                                               // 0 제외 숫자 입력
+                    {
+                        Program.InputError();                          // "잘못된 입력입니다." 출력
+                    }
+                }
+                else                                                   // 문자 입력
+                {
+                    Program.InputError();                              // "잘못된 입력입니다." 출력
+                }
+            }  
             return false;
         }
 
