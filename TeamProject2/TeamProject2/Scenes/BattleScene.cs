@@ -16,31 +16,43 @@ namespace TeamProject2
         public bool MonsterSpawn()
         {
             // 몬스터 객체들을 모아놓는 리스트 monsters 객체 생성
-
+            monsters = new List<Monster>();
             // 1 ~ 4 까지의 랜덤한 수 생성
-            
+            Random random = new Random();
+            int randomCount = random.Next(1, 5);
             // 랜덤한 수만큼 반복
-                
+            for (int i = 0; i < randomCount; i++)
+            {
                 // 0 ~ 2 까지의 랜덤한 수 생성
-
+                int randomType = random.Next(3);
                 // 랜덤한 수가 0이면
-                    
+                Monster monster;
+                if (randomType == 0)
+                {
                     // 미니언 몬스터 생성
-
+                     monster = new Monster(2, "미니언", 15, 5);
+                }
                 // 랜덤한 수가 0이 아니고 1이면
-
+                else if (randomType == 1)
+                {
                     // 공허충 몬스터 생성
-
+                    monster = new Monster(3, "공허충", 10, 9);
+                }
                 // 랜덤한 수가 0도 아니고 1도 아니면
-                    
+                else
+                {
                     // 대포 미니언 생성
-
+                    monster = new Monster(5, "대포미니언", 25, 8);
+                }
                 // 만든 몬스터가 null이면
-                        
+                if (monsters == null)
+                {
                     // false 반환
-
+                    return false;
+                }
                 // monsters 리스트에 생성한 Monster 객체 추가
-
+                monsters.Add(monster);
+            }
             return true;        // 몬스터 객체들을 생성한 뒤, 리스트에 추가한 작업이 끝나면 true 반환
         }
 

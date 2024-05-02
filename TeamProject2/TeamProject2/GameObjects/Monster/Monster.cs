@@ -19,6 +19,14 @@ namespace TeamProject2
 
         private string name = null;
 
+        public Monster(int level, string name, int hp, int attack)
+        {
+            this.attack = attack;
+            this.hp = hp;
+            this.level = level;
+            this.name = name;
+        }
+
         void MonsterAttack(Player player)
         {
             // player hp에서 monster의 attack을 뺌
