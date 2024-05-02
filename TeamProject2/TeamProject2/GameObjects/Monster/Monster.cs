@@ -10,23 +10,6 @@ namespace TeamProject2
     {
         // private으로 접근 제한해놨으므로
         // Monster 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
-
-        public int Hp
-        {
-            get { return hp; }
-            set { hp = value; }
-        }
-        public int Level
-        {
-            get { return level; }
-            set { level = value; }
-        }
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
         private int attack = 0;
 
         private int hp = 0;
@@ -44,6 +27,27 @@ namespace TeamProject2
             this.level = level;
             this.name = name;
         }
+        // Monster 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
+        public int Attack
+        {
+            get { return attack; }
+            set {  attack = value; }
+        }
+        public int Hp
+        {
+            get { return hp; }
+            set { hp = value; }
+        }
+        public int Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
         void MonsterAttack(Player player)
         {
@@ -56,6 +60,7 @@ namespace TeamProject2
         void ShowMonsterStatus()
         {
             // 레벨, 이름, hp로 문자열 출력
+            Console.WriteLine($"Lv.{Level} {Name}  HP {Hp}");
         }
     }
 }
