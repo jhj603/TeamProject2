@@ -35,7 +35,7 @@ namespace TeamProject2
                 // player의 hp = 0
         }
 
-        void ShowMonsterStatus()
+        public void ShowMonsterStatus()
         {
             // 레벨, 이름, hp로 문자열 출력
         }

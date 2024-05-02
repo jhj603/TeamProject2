@@ -171,36 +171,69 @@ namespace TeamProject2
         public void ShowBattle()
         {
             // startHP에 현재 플레이어의 hp 저장
+            int startHP = status.HP;
 
             // 무한 반복
+            while (true)
+            { 
 
                 // "Battle!!" 문자열 출력
+                Console.WriteLine("Battle!");
+
 
                 // monsters의 크기만큼 반복
-                
+                for (int i = 0; i < monsters.Count; i++)
+                {
                     // Monster.ShowMonsterStatus() 호출
+                    monsters[i].ShowMonsterStatus();
+                }
 
                 // "[내정보]" 출력
+                Console.WriteLine("[내정보]");
 
                 // Player.ShowDungeonStatus() 호출
+                status.ShowDungeonStatus();
+
 
                 // 나머지 문자열 출력
+                Console.WriteLine("1. 공격");
+                Console.WriteLine(" ");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine(">>");
+
+
 
                 // 입력
-                
+                string number = Console.ReadLine();
+
+                switch (number) 
+                {
                     // 1. 입력
-                        
+                    case "1":
+
                         // Battle.ShowMonsterChoice() 수행 후 반환 값이 true일 때
-                            
+                        if (true == ShowMonsterChoice())
+                        {
                             // ShowBattle() 함수 나가기
+                            return;
+                        }
+                            break;
 
                     // 1 제외 숫자 입력
-                        
+                    default:
+
                         // "잘못된 입력입니다." 출력
+                        Program.InputError();
 
-                // 문자 입력
+                        // 문자 입력
 
-                    // "잘못된 입력입니다." 출력
+                        // "잘못된 입력입니다." 출력
+                        break;
+
+                }
+
+            }
+
         }
 
         bool ShowMonsterChoice()

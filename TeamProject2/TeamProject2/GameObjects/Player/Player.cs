@@ -11,6 +11,16 @@ namespace TeamProject2
         // private으로 접근 제한해놨으므로
         // Player 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
 
+        public int HP
+        {
+            get
+            {
+                return hp;
+            }
+        }
+
+
+
         private int attack = 0;         // 공격력
 
         private int hp = 0;             // HP
