@@ -11,7 +11,7 @@ namespace TeamProject2
         // private으로 접근 제한해놨으므로
         // Player 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
 
-        private int attack { get; set; }   // 공격력
+        private int attack = 0;            // 공격력
 
         private int hp = 0;                // HP
 
@@ -54,9 +54,13 @@ namespace TeamProject2
         public void PlayerAttack(Monster monster)
         {
             // monster의 hp에서 player의 attack을 뺌
-            
+            monster.Hp -= attack;
             // monster의 hp가 0 이하라면
+            if (monster.Hp <= 0)
+            {
                 // monster의 hp = 0
+                monster.Hp = 0;
+            }
         }
 
         public void ShowDungeonStatus()
