@@ -10,8 +10,12 @@ namespace TeamProject2
     {
         private static SkillManager Instance = null;
 
+        Dictionary<PlayerJob, List<Skill>> skillDict = null;
+
         private SkillManager()
         {
+            skillDict = new Dictionary<PlayerJob, List<Skill>>();
+
 
         }
 
