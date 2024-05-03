@@ -114,7 +114,7 @@ namespace TeamProject2
             // 변수를 만들어서 현재 player의 HP 저장
             int nowPlayerHp = status.Hp;
             // Monster.MonsterAttack(player) 수행
-            monsters[int.Parse(monster.Name)].MonsterAttack(status);
+            monster.MonsterAttack(status);
             // 무한 반복
             while (true)
             {
