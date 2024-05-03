@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,66 @@ namespace TeamProject2
         {
             if(status == null)  // status == null이면
             {
-                status = new Player(10, 100, 5, 2, "육회", "전사", 1500);    // Player 객체 생성
+                Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+                Console.WriteLine("원하시는 이름을 설정해주세요.\n");
+                Console.Write(">> ");
+
+                string nameInput = Console.ReadLine();
+
+                while (true)
+                {
+                    Console.Clear();
+
+                    Console.WriteLine("원하는 직업을 선택해주세요.\n");
+                    Console.WriteLine("1. 전사");
+                    Console.WriteLine("2. 마법사");
+                    Console.WriteLine("3. 도적");
+                    Console.WriteLine("4. 궁수");
+                    Console.WriteLine("5. ?????\n");
+                    Console.Write(">> ");
+
+                    Random random = new Random();
+
+                    string jobInput = Console.ReadLine();
+                    int jobNumInput;
+
+                    if (int.TryParse(jobInput, out jobNumInput))
+                    {
+                        if (jobNumInput == 1)
+                        {
+                            status = new Player(10, 100, 5, 1, nameInput, "전사", 1500);    // Player 객체 생성
+                            break;
+                        }
+                        else if (jobNumInput == 2)
+                        {
+                            status = new Player(13, 90, 5, 1, nameInput, "마법사", 1500);
+                            break;
+                        }
+                        else if (jobNumInput == 3)
+                        {
+                            status = new Player(15, 85, 5, 1, nameInput, "도적", 1500);
+                            break;
+                        }
+                        else if (jobNumInput == 4)
+                        {
+                            status = new Player(18, 80, 5, 1, nameInput, "궁수", 1500);
+                            break;
+                        }
+                        else if (jobNumInput == 5)
+                        {
+                            status = new Player(random.Next(10, 21), random.Next(80,101), 5, 1, nameInput, "?????", random.Next(0, 10001));
+                            break;
+                        }
+                        else
+                        {
+                            Program.InputError();
+                        }
+                    }
+                    else
+                    {
+                        Program.InputError();
+                    }
+                }
             }
 
             while (true)    // 무한 반복
