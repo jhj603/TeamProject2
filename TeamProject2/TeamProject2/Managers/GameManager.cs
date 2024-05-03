@@ -89,7 +89,7 @@ namespace TeamProject2
         public void GoDungeon()
         {
             if (battleScene == null) // Battle == null이면
-                battleScene = new BattleScene(); // Battle 객체 생성
+                battleScene = new BattleScene(status); // Battle 객체 생성
 
             if (battleScene.MonsterSpawn() == false) // Battle.MonsterSpawn() 수행이 실패하면
             {

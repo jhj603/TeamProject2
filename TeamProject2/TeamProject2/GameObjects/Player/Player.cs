@@ -10,8 +10,6 @@ namespace TeamProject2
     {
         // private으로 접근 제한해놨으므로
         // Player 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
-
-
         public int Attack
         {
             get { return attack; }
@@ -33,7 +31,6 @@ namespace TeamProject2
             set { name = value; }
         }
     
-
         private int attack = 0;            // 공격력
 
         private int hp = 0;                // HP
@@ -49,7 +46,6 @@ namespace TeamProject2
         private int gold = 0;              // 소지금
         
         private int maxhp = 0;             // 최대 HP
-
 
         public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
         {

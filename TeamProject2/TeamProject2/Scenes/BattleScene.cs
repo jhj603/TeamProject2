@@ -14,6 +14,11 @@ namespace TeamProject2
 
         int startHP = 0;                    // 배틀 시작 시 플레이어의 hp
 
+        public BattleScene(Player _status)
+        {
+            status = _status;
+        }
+
         public bool MonsterSpawn()
         {
             // 몬스터 객체들을 모아놓는 리스트 monsters 객체 생성
@@ -31,7 +36,7 @@ namespace TeamProject2
                 if (randomType == 0)
                 {
                     // 미니언 몬스터 생성
-                     monster = new Monster(2, "미니언", 15, 5);
+                    monster = new Monster(2, "미니언", 15, 5);
                 }
                 // 랜덤한 수가 0이 아니고 1이면
                 else if (randomType == 1)
@@ -57,7 +62,7 @@ namespace TeamProject2
             return true;        // 몬스터 객체들을 생성한 뒤, 리스트에 추가한 작업이 끝나면 true 반환
         }
 
-        bool MonsterHit(Monster monster)
+        void MonsterHit(Monster monster)
         {
             // 변수를 만들어서 현재 monster의 HP 저장
             int nowMonsterHp = monster.Hp;
@@ -66,6 +71,9 @@ namespace TeamProject2
             // 무한 반복
             while (true)
             {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
                 // "Battle!!" 출력
                 Console.WriteLine("Battle!!\n");
                 // 플레이어의 이름을 문자열 생성 후 출력
@@ -94,7 +102,7 @@ namespace TeamProject2
                 {
                     if (num == 0)                                      // 0. 입력
                     {
-                        return true;                                   // true 반환
+                        return;                                   // true 반환
                     }
                     else                                               // 0 제외 숫자 입력
                     {
@@ -105,8 +113,7 @@ namespace TeamProject2
                 {
                     Program.InputError();                              // "잘못된 입력입니다." 출력
                 }
-            }  
-            return false;
+            }
         }
 
         bool PlayerHit(Monster monster)
@@ -118,6 +125,9 @@ namespace TeamProject2
             // 무한 반복
             while (true)
             {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
                 // "Battle!!" 출력
                 Console.WriteLine("Battle!!\n");
                 // 몬스터의 레벨, 이름을 문자열 생성 후 출력
@@ -149,30 +159,35 @@ namespace TeamProject2
                 }
             }
             return false;
-        }        
+        }
 
         void PlayerVictory()
         {
             // 무한 반복
             while (true)
             {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
                 Console.WriteLine("Victory!");  // "Victory" 까지 문자열 출력
+                Console.WriteLine();
                 Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.");    // monsters의 크기로 "던전에서 몬스터 ~마리를 잡았습니다." 문자열 생성 후 출력
+                Console.WriteLine();
                 Console.WriteLine($"Lv. {status.Level} {status.Name}");    // player의 레벨, 이름 으로 문자열 생성 후 출력
                 Console.WriteLine($"HP {startHP} -> {status.Hp}\n");    // starthHp와 player의 hp로 문자열 생성 후 출력
 
                 // 나머지 문자열 출력
 
-                Console.WriteLine("0. 다음\n");    
+                Console.WriteLine("0. 다음\n");
 
                 Console.WriteLine(">>");
 
                 string input = Console.ReadLine();  // 입력
                 int inputNum;
 
-                if(int.TryParse(input, out inputNum))
+                if (int.TryParse(input, out inputNum))
                 {
-                    if(inputNum == 0)
+                    if (inputNum == 0)
                     {
                         return;    // PlayerVictory() 함수 나가기
                     }
@@ -193,6 +208,9 @@ namespace TeamProject2
             // 무한 반복
             while (true)
             {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
                 // "You Lose" 까지 문자열 출력
                 Console.WriteLine("Battle - Result\n");
                 Console.WriteLine("You Lose\n");
@@ -202,6 +220,9 @@ namespace TeamProject2
                 Console.WriteLine($"HP {startHP} -> {status.Hp}\n");
                 // 나머지 문자열 출력
                 Console.WriteLine("0. 다음");
+                Console.WriteLine();
+
+                Console.WriteLine(">>");
 
                 string input = Console.ReadLine();                     // 입력
                 int num;
@@ -224,16 +245,34 @@ namespace TeamProject2
             }
         }
 
+        bool MonsterDeadCheck()
+        {
+            // monsters의 모든 몬스터가 죽었으면
+            for (int i = 0; i < monsters.Count; ++i)
+            {
+                if (monsters[i].Hp > 0)    // 0번째가 HP 0이면 1, 2, 3번째 친구들을 검사하지 않습니다.
+                {                           // 검사하는 친구 중 하나라도 HP가 0보다 크면 false를 반환
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public void ShowBattle()
         {
             // startHP에 현재 플레이어의 hp 저장
-            int startHP = status.Hp;
+            startHP = status.Hp;
 
             // 무한 반복
             while (true)
             {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
                 // "Battle!!" 문자열 출력
                 Console.WriteLine("Battle!");
+                Console.WriteLine();
 
                 // monsters의 크기만큼 반복
                 for (int i = 0; i < monsters.Count; i++)
@@ -242,6 +281,8 @@ namespace TeamProject2
                     monsters[i].ShowMonsterStatus();
                 }
 
+                Console.WriteLine();
+
                 // "[내정보]" 출력
                 Console.WriteLine("[내정보]");
 
@@ -249,6 +290,7 @@ namespace TeamProject2
                 status.ShowDungeonStatus();
 
                 // 나머지 문자열 출력
+                Console.WriteLine();
                 Console.WriteLine("1. 공격");
                 Console.WriteLine(" ");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -257,7 +299,7 @@ namespace TeamProject2
                 // 입력
                 string number = Console.ReadLine();
 
-                switch (number) 
+                switch (number)
                 {
                     // 1. 입력
                     case "1":
@@ -289,15 +331,21 @@ namespace TeamProject2
             // 무한 반복
             while (true)
             {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
                 // "Battle!!" 문자열 출력
                 Console.WriteLine("Battle!!");
+                Console.WriteLine();
 
                 // monsters의 크기만큼 반복
                 for (int i = 0; i < monsters.Count; i++)
                 {
-                    // Monster.ShowMonsterStatus() 호출       
+                    // Monster.ShowMonsterStatus() 호출
+                    Console.Write($"{i + 1} ");
                     monsters[i].ShowMonsterStatus();        // 숫자를 앞에 붙여 선택할 수 있게 해야 함
                 }
+                Console.WriteLine();
 
                 // "[내정보]" 출력
                 Console.WriteLine("[내정보]");
@@ -306,6 +354,7 @@ namespace TeamProject2
                 status.ShowDungeonStatus();
 
                 // 나머지 문자열 출력
+                Console.WriteLine();
                 Console.WriteLine("0. 취소\n");
                 Console.WriteLine("대상을 선택해주세요.\n");
                 Console.Write(">> ");
@@ -317,32 +366,52 @@ namespace TeamProject2
                 {
                     if (num > 0 && num <= monsters.Count)                       // 1부터 monsters의 크기 사이의 정수 입력
                     {
-                        // Battle.MonsterHit(monster) 수행
+                        // 몬스터가 죽었으면 잘못 골랐다는 에러 메시지 출력
+                        if (0 == monsters[num - 1].Hp)
+                        {
+                            Console.WriteLine("이미 죽은 몬스터입니다.");
 
-                        // monsters의 모든 몬스터가 죽었으면
+                            Thread.Sleep(1000);
 
-                            // Battle.PlayerVictory 수행 후 true 반환
+                            continue;
+                        }
+                        else
+                        {
+                            // Battle.MonsterHit(monster) 수행
+                            MonsterHit(monsters[num - 1]);
+                            // monsters의 모든 몬스터가 죽었으면   bool MonsterDeadCheck
+                            if (true == MonsterDeadCheck())
+                            {
+                                // Battle.PlayerVictory 수행 후 true 반환
+                                PlayerVictory();
+                                return true;
+                            }
+                        }
 
                         // monsters의 크기만큼 반복
-                        
-                            // Battle.PlayerHit(monster) 수행
-
-                            // player가 죽었으면
-
-                                // Battle.PlayerLose 수행 후 true 반환
-
-                        if (MonsterHit(monsters[num - 1]) == true)              // Battle.MonsterHit(monster) 수행 후 반환 값이 true일 경우
+                        for (int i = 0; i < monsters.Count; ++i)
                         {
-                            PlayerVictory();                                    // Battle.PlayerVictory 수행 후 true 반환
-                            return true;
-                        }
-                        else                                                    // Battle.PlayerHit(monster) 수행 후 반환 값이 true일 경우 //????
-                        {
-                            PlayerLose();                                       // Battle.PlayerLose 수행 후 true 반환
-                            return true;
+                            // 안죽은 몬스터면 공격을 해라
+                            if (0 < monsters[i].Hp)
+                            {
+                                // Battle.PlayerHit(monster) 수행
+                                PlayerHit(monsters[i]);
+                                // player가 죽었으면
+                                if (0 == status.Hp)
+                                {
+                                    // Battle.PlayerLose 수행 후 true 반환
+                                    PlayerLose();
+                                    return true;
+                                }
+                            }
                         }
                     }
-                    else                                                        // 1부터 monsters의 크기 제외 숫자 입력
+                    // 1부터 monsters의 크기 사이의 정수가 아니라 0이 입력되면 돌아가기
+                    else if (0 == num)
+                    {
+                        return false;
+                    }
+                    else                                                        // 0도 아니고 1부터 monsters의 크기 제외 숫자 입력
                     {
                         Program.InputError();                                       // "잘못된 입력입니다." 출력
                     }

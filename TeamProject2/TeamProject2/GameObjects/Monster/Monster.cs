@@ -61,10 +61,20 @@ namespace TeamProject2
 
         }
 
-        public void ShowMonsterStatus()
+        public void ShowMonsterStatus()     
         {
-            // 레벨, 이름, hp로 문자열 출력
-            Console.WriteLine($"Lv.{Level} {Name}  HP {Hp}");
+            Console.Write($"Lv.{Level} {Name}  ");
+
+            // HP 0 이면 Dead 나옴
+            if (0 == Hp)
+            {
+                Console.WriteLine("Dead");
+            }
+            else
+            {
+                // 레벨, 이름, hp로 문자열 출력
+                Console.WriteLine($"HP {Hp}");
+            }
         }
     }
 }
