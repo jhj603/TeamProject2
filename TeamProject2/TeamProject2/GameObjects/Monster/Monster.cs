@@ -49,6 +49,7 @@ namespace TeamProject2
             set { name = value; }
         }
 
+
         public void MonsterAttack(Player player)
         {
             player.Hp -= attack;    // player hp에서 monster의 attack을 뺌
