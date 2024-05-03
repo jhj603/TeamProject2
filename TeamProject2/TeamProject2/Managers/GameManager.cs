@@ -13,7 +13,6 @@ namespace TeamProject2
 
         public void ShowMainScene()
         {
-
             if(status == null)  // status == null이면
             {
                 status = new Player(10, 100, 5, 2, "육회", "전사", 1500);    // Player 객체 생성
