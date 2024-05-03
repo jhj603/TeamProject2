@@ -9,7 +9,7 @@ namespace TeamProject2
 {
     internal class BattleScene
     {
-        Player status = null;               // 플레이어 객체
+        Player status = null;               // 플레이어 객체가 비어있다. GameManager에서 받아와야 함.
         List<Monster> monsters = null;      // 몬스터 객체들을 모아놓는 리스트
 
         int startHP = 0;                    // 배틀 시작 시 플레이어의 hp
@@ -218,15 +218,13 @@ namespace TeamProject2
         public void ShowBattle()
         {
             // startHP에 현재 플레이어의 hp 저장
-            int startHP = status.HP;
+            int startHP = status.Hp;
 
             // 무한 반복
             while (true)
-            { 
-
+            {
                 // "Battle!!" 문자열 출력
                 Console.WriteLine("Battle!");
-
 
                 // monsters의 크기만큼 반복
                 for (int i = 0; i < monsters.Count; i++)
@@ -241,14 +239,11 @@ namespace TeamProject2
                 // Player.ShowDungeonStatus() 호출
                 status.ShowDungeonStatus();
 
-
                 // 나머지 문자열 출력
                 Console.WriteLine("1. 공격");
                 Console.WriteLine(" ");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.WriteLine(">>");
-
-
 
                 // 입력
                 string number = Console.ReadLine();
@@ -257,15 +252,13 @@ namespace TeamProject2
                 {
                     // 1. 입력
                     case "1":
-
                         // Battle.ShowMonsterChoice() 수행 후 반환 값이 true일 때
                         if (true == ShowMonsterChoice())
                         {
                             // ShowBattle() 함수 나가기
                             return;
                         }
-                            break;
-
+                        break;
                     // 1 제외 숫자 입력
                     default:
 
@@ -276,7 +269,6 @@ namespace TeamProject2
 
                         // "잘못된 입력입니다." 출력
                         break;
-
                 }
 
             }
@@ -294,8 +286,8 @@ namespace TeamProject2
                 // monsters의 크기만큼 반복
                 for (int i = 0; i < monsters.Count; i++)
                 {
-                    // Monster.ShowMonsterStatus() 호출
-                    monsters[i].ShowMonsterStatus();
+                    // Monster.ShowMonsterStatus() 호출       
+                    monsters[i].ShowMonsterStatus();        // 숫자를 앞에 붙여 선택할 수 있게 해야 함
                 }
 
                 // "[내정보]" 출력
@@ -316,6 +308,20 @@ namespace TeamProject2
                 {
                     if (num > 0 && num <= monsters.Count)                       // 1부터 monsters의 크기 사이의 정수 입력
                     {
+                        // Battle.MonsterHit(monster) 수행
+
+                        // monsters의 모든 몬스터가 죽었으면
+
+                            // Battle.PlayerVictory 수행 후 true 반환
+
+                        // monsters의 크기만큼 반복
+                        
+                            // Battle.PlayerHit(monster) 수행
+
+                            // player가 죽었으면
+
+                                // Battle.PlayerLose 수행 후 true 반환
+
                         if (MonsterHit(monsters[num - 1]) == true)              // Battle.MonsterHit(monster) 수행 후 반환 값이 true일 경우
                         {
                             PlayerVictory();                                    // Battle.PlayerVictory 수행 후 true 반환
