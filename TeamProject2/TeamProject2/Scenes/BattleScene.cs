@@ -141,29 +141,38 @@ namespace TeamProject2
         void PlayerVictory()
         {
             // 무한 반복
-
-                // "Victory" 까지 문자열 출력
-
-                // monsters의 크기로 "던전에서 몬스터 ~마리를 잡았습니다." 문자열 생성 후 출력
-
-                // player의 레벨, 이름 으로 문자열 생성 후 출력
-                // starthHp와 player의 hp로 문자열 생성 후 출력
+            while (true)
+            {
+                Console.WriteLine("Victory!");  // "Victory" 까지 문자열 출력
+                Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.");    // monsters의 크기로 "던전에서 몬스터 ~마리를 잡았습니다." 문자열 생성 후 출력
+                Console.WriteLine($"Lv. {status.Level} {status.Name}");    // player의 레벨, 이름 으로 문자열 생성 후 출력
+                Console.WriteLine($"HP {startHP} -> {status.Hp}\n");    // starthHp와 player의 hp로 문자열 생성 후 출력
 
                 // 나머지 문자열 출력
 
-                // 입력
-                
-                    // 0. 입력
+                Console.WriteLine("0. 다음\n");    
 
-                        // PlayerVictory() 함수 나가기
+                Console.WriteLine(">>");
 
-                    // 0 제외 숫자 입력
+                string input = Console.ReadLine();  // 입력
+                int inputNum;
 
-                        // "잘못된 입력입니다." 출력
-
-                // 문자 입력
-
-                    // "잘못된 입력입니다." 출력
+                if(int.TryParse(input, out inputNum))
+                {
+                    if(inputNum == 0)
+                    {
+                        return;    // PlayerVictory() 함수 나가기
+                    }
+                    else   // 0 제외 숫자 입력
+                    {
+                        Program.InputError();   // "잘못된 입력입니다." 출력
+                    }
+                }
+                else    // 문자 입력
+                {
+                    Program.InputError();   // "잘못된 입력입니다." 출력
+                }
+            }
         }
 
         void PlayerLose()
