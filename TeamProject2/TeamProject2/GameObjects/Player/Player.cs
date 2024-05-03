@@ -30,6 +30,10 @@ namespace TeamProject2
             get { return name; }
             set { name = value; }
         }
+        public int Random_attackErrorrange
+        {
+            get { return random_attackErrorrange; }
+        }
     
         private int attack = 0;            // 공격력
 
@@ -46,6 +50,8 @@ namespace TeamProject2
         private int gold = 0;              // 소지금
         
         private int maxhp = 0;             // 최대 HP
+
+        private int random_attackErrorrange = 0;
 
         public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
         {
@@ -72,8 +78,12 @@ namespace TeamProject2
 
         public void PlayerAttack(Monster monster)
         {
+            Random rand = new Random();  // 랜덤객채를 생성
+            int error = (int)Math.Ceiling(0.1f * Attack);
+            random_attackErrorrange = rand.Next((Attack - error), (Attack + error + 1));         // 공격력 오차범위 생성
+
             // monster의 hp에서 player의 attack을 뺌
-            monster.Hp -= attack;
+            monster.Hp -= random_attackErrorrange;
             // monster의 hp가 0 이하라면
             if (monster.Hp <= 0)
             {

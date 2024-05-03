@@ -63,7 +63,7 @@ namespace TeamProject2
         }
 
         void MonsterHit(Monster monster)
-        {
+        {       
             // 변수를 만들어서 현재 monster의 HP 저장
             int nowMonsterHp = monster.Hp;
             // Player.PlayerAttack(monster) 수행
@@ -79,7 +79,7 @@ namespace TeamProject2
                 // 플레이어의 이름을 문자열 생성 후 출력
                 Console.WriteLine($"{status.Name}의 공격");
                 // 몬스터의 레벨, 이름, 플레이어의 데미지로 문자열 생성 후 출력
-                Console.WriteLine($"Lv. {monster.Level} {monster.Name}을(를) 맞췄습니다. [데미지 : {status.Attack}]\n");
+                Console.WriteLine($"Lv. {monster.Level} {monster.Name}을(를) 맞췄습니다. [데미지 : {status.Random_attackErrorrange}]\n");
                 // 몬스터의 레벨, 이름을 문자열 생성 후 출력
                 Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
 
