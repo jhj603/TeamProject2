@@ -31,6 +31,25 @@ namespace TeamProject2
             Job = job;                                              // 자식 클래스(Player)만 갖고 있는 필드 초기화
             Defense = defense;                                      // 자식 클래스(Player)만 갖고 있는 필드 초기화
             MaxHP = hp;
+
+            skills = new List<Skill>();
+
+            SkillManager skillManager = SkillManager.GetInstance();
+
+            if (null == skillManager)
+            {
+                
+            }
+            switch (Job)
+            {
+                case PlayerJob.Warrior:
+
+                    break;
+                case PlayerJob.Magician:
+                    break;
+                case PlayerJob.Archer:
+                    break;
+            }
         }
 
         public override void PrintStatus()

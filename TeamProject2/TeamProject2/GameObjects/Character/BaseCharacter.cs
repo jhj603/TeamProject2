@@ -29,6 +29,8 @@ namespace TeamProject2
 
         public bool IsCritical { get; protected set; } = false;
 
+        protected List<Skill> skills = null;
+
         protected Random? rand = null;
 
         int percent = 0;
