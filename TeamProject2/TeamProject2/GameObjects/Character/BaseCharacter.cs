@@ -29,7 +29,7 @@ namespace TeamProject2
 
         public bool IsCritical { get; protected set; } = false;
 
-        protected List<Skill> skills = null;
+        public List<Skill> Skills { get; protected set; } = null;
 
         protected Random? rand = null;
 
@@ -67,7 +67,7 @@ namespace TeamProject2
             else
             {
                 error = (int)Math.Ceiling(Attack * 0.1f);
-                CurrentDamage = rand.Next(Attack - error, Attack + error);
+                CurrentDamage = rand.Next(Attack - error, Attack + error + 1);
             }
 
             target.Hit(CurrentDamage);
@@ -92,6 +92,21 @@ namespace TeamProject2
                 return true;
 
             return false;
+        }
+
+        public List<int> SkillAttack(int skillChoice, Monster monster)
+        {
+            List<int> Damages = Skills[skillChoice].GetSkillDamages(Attack);
+
+            foreach (int damage in Damages)
+            {
+                monster.Hit(damage);
+
+                if (CharacterState.Dead == monster.CurrentState)
+                    break;
+            }
+
+            return Damages;
         }
     }
 }

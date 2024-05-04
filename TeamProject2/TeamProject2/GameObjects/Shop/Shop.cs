@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamProject2
 {
-    internal class ThunderBolt
+    internal class Shop
     {
     }
 }

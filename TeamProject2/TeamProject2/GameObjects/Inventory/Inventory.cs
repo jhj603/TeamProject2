@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamProject2
 {
-    internal class FireBall
+    internal class Inventory
     {
     }
 }
