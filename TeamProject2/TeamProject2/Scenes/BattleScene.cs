@@ -75,7 +75,7 @@ namespace TeamProject2
                 Console.Clear();
 
                 // "Battle!!" 출력
-                Console.WriteLine("Battle!!\n");
+                Program.ColorDarkRed("Battle!!\n\n");
                 // 플레이어의 이름을 문자열 생성 후 출력
                 Console.WriteLine($"{status.Name}의 공격");
                 // 몬스터의 레벨, 이름, 플레이어의 데미지로 문자열 생성 후 출력
@@ -129,7 +129,7 @@ namespace TeamProject2
                 Console.Clear();
 
                 // "Battle!!" 출력
-                Console.WriteLine("Battle!!\n");
+                Program.ColorDarkRed("Battle!!\n\n");
                 // 몬스터의 레벨, 이름을 문자열 생성 후 출력
                 Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
                 // 플레이어의 이름, 몬스터의 데미지로 문자열 생성 후 출력
@@ -169,7 +169,11 @@ namespace TeamProject2
                 // 콘솔 창 출력 지워줌.
                 Console.Clear();
 
+                Program.ColorDarkRed("Battle ");
+                Console.WriteLine("- Result\n");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!");  // "Victory" 까지 문자열 출력
+                Console.ResetColor();
                 Console.WriteLine();
                 Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.");    // monsters의 크기로 "던전에서 몬스터 ~마리를 잡았습니다." 문자열 생성 후 출력
                 Console.WriteLine();
@@ -180,7 +184,7 @@ namespace TeamProject2
 
                 Console.WriteLine("0. 다음\n");
 
-                Console.WriteLine(">>");
+                Console.Write(">> ");
 
                 string input = Console.ReadLine();  // 입력
                 int inputNum;
@@ -212,8 +216,9 @@ namespace TeamProject2
                 Console.Clear();
 
                 // "You Lose" 까지 문자열 출력
-                Console.WriteLine("Battle - Result\n");
-                Console.WriteLine("You Lose\n");
+                Program.ColorDarkRed("Battle ");
+                Console.WriteLine("- Result\n");
+                Program.ColorDarkRed("You Lose\n\n");
                 // player의 레벨, 이름 으로 문자열 생성 후 출력
                 Console.WriteLine($"Lv.{status.Level} {status.Name}");
                 // starthHp와 player의 hp로 문자열 생성 후 출력
@@ -222,7 +227,7 @@ namespace TeamProject2
                 Console.WriteLine("0. 다음");
                 Console.WriteLine();
 
-                Console.WriteLine(">>");
+                Console.Write(">> ");
 
                 string input = Console.ReadLine();                     // 입력
                 int num;
@@ -271,16 +276,16 @@ namespace TeamProject2
                 Console.Clear();
 
                 // "Battle!!" 문자열 출력
-                Console.WriteLine("Battle!");
-                Console.WriteLine();
+                Program.ColorDarkRed("Battle!!\n\n");
 
+                Console.WriteLine("=====================================");
                 // monsters의 크기만큼 반복
                 for (int i = 0; i < monsters.Count; i++)
                 {
                     // Monster.ShowMonsterStatus() 호출
                     monsters[i].ShowMonsterStatus();
                 }
-
+                Console.WriteLine("=====================================");
                 Console.WriteLine();
 
                 // "[내정보]" 출력
@@ -292,9 +297,9 @@ namespace TeamProject2
                 // 나머지 문자열 출력
                 Console.WriteLine();
                 Console.WriteLine("1. 공격");
-                Console.WriteLine(" ");
+                Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
-                Console.WriteLine(">>");
+                Console.Write(">> ");
 
                 // 입력
                 string number = Console.ReadLine();
@@ -335,9 +340,9 @@ namespace TeamProject2
                 Console.Clear();
 
                 // "Battle!!" 문자열 출력
-                Console.WriteLine("Battle!!");
-                Console.WriteLine();
+                Program.ColorDarkRed("Battle!!\n\n");
 
+                Console.WriteLine("=====================================");
                 // monsters의 크기만큼 반복
                 for (int i = 0; i < monsters.Count; i++)
                 {
@@ -345,6 +350,7 @@ namespace TeamProject2
                     Console.Write($"{i + 1} ");
                     monsters[i].ShowMonsterStatus();        // 숫자를 앞에 붙여 선택할 수 있게 해야 함
                 }
+                Console.WriteLine("=====================================");
                 Console.WriteLine();
 
                 // "[내정보]" 출력

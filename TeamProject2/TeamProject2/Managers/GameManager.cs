@@ -14,6 +14,8 @@ namespace TeamProject2
 
         public void ShowMainScene()
         {
+            Console.Clear();
+
             if(status == null)  // status == null이면
             {
                 Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
@@ -86,11 +88,13 @@ namespace TeamProject2
                 Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
                 Console.WriteLine("이제 전투를 시작할 수 있습니다.\n");
 
-                Console.WriteLine("1. 상태 보기");
-                Console.WriteLine("2. 전투 시작\n");
+                Console.Write("1. ");
+                Program.ColorYellow("상태 보기");
+                Console.Write("2. ");
+                Program.ColorDarkRed("전투 시작\n\n");
 
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
-                Console.WriteLine(">>");
+                Console.Write(">> ");
                 string input = Console.ReadLine();  // 입력
 
                 switch(input)
@@ -114,10 +118,12 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("상태 보기");                        // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
+                Program.ColorYellow("상태 보기");                      // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
                 Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
 
+                Console.WriteLine("=====================================");
                 status.ShowStatus();                                   // Player.ShowStatus() 호출
+                Console.WriteLine("=====================================");
 
                 Console.WriteLine("\n0. 나가기\n");                    // 상태 보기 화면(나머지) 출력
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
