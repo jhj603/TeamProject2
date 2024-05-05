@@ -34,7 +34,7 @@ namespace TeamProject2
             switch (inputJob)
             {
                 case PlayerJob.Warrior:
-                    if (player.Initialize(1, nameInput, inputJob, 8, 10, 100, 1500, 50))
+                    if (player.Initialize(1, nameInput, inputJob, 8, 10, 100, 150000, 50))
                         return SceneType.Main;
                     else
                         return SceneType.End;

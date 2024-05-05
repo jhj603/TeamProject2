@@ -23,9 +23,9 @@ namespace TeamProject2
         {
             monsterDict = new Dictionary<MonsterType, Monster>();
 
-            monsterDict.Add(MonsterType.Minion, new Monster(1, MonsterType.Minion, "미니언", 5, 15));
-            monsterDict.Add(MonsterType.VoidInsect, new Monster(1, MonsterType.VoidInsect, "공허충", 9, 10));
-            monsterDict.Add(MonsterType.SiegeMinion, new Monster(1, MonsterType.SiegeMinion, "대포미니언", 8, 25));
+            monsterDict.Add(MonsterType.Minion, new Monster(1, MonsterType.Minion, "미니언", 5, 15, 10));
+            monsterDict.Add(MonsterType.VoidInsect, new Monster(1, MonsterType.VoidInsect, "공허충", 9, 10, 15));
+            monsterDict.Add(MonsterType.SiegeMinion, new Monster(1, MonsterType.SiegeMinion, "대포미니언", 8, 25, 20));
 
             monsters = new List<Monster>();
 
@@ -53,28 +53,31 @@ namespace TeamProject2
                     case MonsterType.Minion:
                         monsters.Add(new Monster(
                             monsterLevel,
-                            MonsterType.Minion,
-                            monsterDict[MonsterType.Minion].Name,
-                            ((monsterLevel - 1) * 3) + monsterDict[MonsterType.Minion].Attack,
-                            ((monsterLevel - 1) * 5) + monsterDict[MonsterType.Minion].HP
+                            insertType,
+                            monsterDict[insertType].Name,
+                            ((monsterLevel - 1) * 3) + monsterDict[insertType].Attack,
+                            ((monsterLevel - 1) * 5) + monsterDict[insertType].HP,
+                            monsterLevel
                             ));
                         break;
                     case MonsterType.VoidInsect:
                         monsters.Add(new Monster(
                             monsterLevel,
-                            MonsterType.VoidInsect,
-                            monsterDict[MonsterType.VoidInsect].Name,
-                            ((monsterLevel - 1) * 3) + monsterDict[MonsterType.VoidInsect].Attack,
-                            ((monsterLevel - 1) * 5) + monsterDict[MonsterType.VoidInsect].HP
+                            insertType,
+                            monsterDict[insertType].Name,
+                            ((monsterLevel - 1) * 3) + monsterDict[insertType].Attack,
+                            ((monsterLevel - 1) * 5) + monsterDict[insertType].HP,
+                            monsterLevel
                             ));
                         break;
                     case MonsterType.SiegeMinion:
                         monsters.Add(new Monster(
                             monsterLevel,
-                            MonsterType.SiegeMinion,
-                            monsterDict[MonsterType.SiegeMinion].Name,
-                            ((monsterLevel - 1) * 3) + monsterDict[MonsterType.SiegeMinion].Attack,
-                            ((monsterLevel - 1) * 5) + monsterDict[MonsterType.SiegeMinion].HP
+                            insertType,
+                            monsterDict[insertType].Name,
+                            ((monsterLevel - 1) * 3) + monsterDict[insertType].Attack,
+                            ((monsterLevel - 1) * 5) + monsterDict[insertType].HP,
+                            monsterLevel
                             ));
                         break;
                 }

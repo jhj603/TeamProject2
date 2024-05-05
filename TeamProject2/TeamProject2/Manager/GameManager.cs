@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamProject2.Scenes;
 
 namespace TeamProject2
 {
@@ -86,6 +87,22 @@ namespace TeamProject2
                                 return;
                             }
                             break;
+                        case SceneType.Inventory:
+                            if (!ChangeScene())
+                            {
+                                Console.WriteLine("씬 변경 실패!");
+                                return;
+                            }
+                            break;
+                        case SceneType.Shop:
+                            if (!ChangeScene())
+                            {
+                                Console.WriteLine("씬 변경 실패!");
+                                return;
+                            }
+                            break;
+                        case SceneType.Quest:
+                            break;
                         case SceneType.End:
                             return;
                     }
@@ -112,6 +129,14 @@ namespace TeamProject2
                         break;
                     case SceneType.Battle:
                         scene = new BattleScene();
+                        break;
+                    case SceneType.Inventory:
+                        scene = new InventoryScene();
+                        break;
+                    case SceneType.Shop:
+                        scene = new ShopScene();
+                        break;
+                    case SceneType.Quest:
                         break;
                 }               
             }

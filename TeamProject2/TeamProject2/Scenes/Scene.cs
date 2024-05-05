@@ -13,6 +13,9 @@ namespace TeamProject2
         Main,
         Status,
         Battle,
+        Inventory,
+        Shop,
+        Quest,
         NoChange,
         End
     }

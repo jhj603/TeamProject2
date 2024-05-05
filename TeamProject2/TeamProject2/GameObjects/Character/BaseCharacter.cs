@@ -17,11 +17,13 @@ namespace TeamProject2
     {
         public int Level { get; protected set; }          // 레벨
         public string? Name { get; protected set; } = null;       // 이름
-        public int Attack { get; protected set; }         // 공격력
+        public float Attack { get; protected set; }         // 공격력
         public int HP { get; protected set; }             // HP
         public int Gold { get; protected set; }           // 소지금
 
         public int MP { get; protected set; }
+
+        public int Exp { get; protected set; }
 
         public CharacterState CurrentState { get; protected set; }
 
@@ -38,7 +40,7 @@ namespace TeamProject2
 
         public abstract void PrintStatus();
 
-        public void Initialize(int level, string name, int attack, int hp, int gold, int mp)        // 위 필드들을 초기화하는 함수
+        public void Initialize(int level, string name, float attack, int hp, int gold, int mp, int exp)        // 위 필드들을 초기화하는 함수
         {
             Level = level;
             Name = name;
@@ -46,6 +48,7 @@ namespace TeamProject2
             HP = hp;
             Gold = gold;
             MP = mp;
+            Exp = exp;
 
             CurrentState = CharacterState.Alive;
 
@@ -67,7 +70,7 @@ namespace TeamProject2
             else
             {
                 error = (int)Math.Ceiling(Attack * 0.1f);
-                CurrentDamage = rand.Next(Attack - error, Attack + error + 1);
+                CurrentDamage = rand.Next((int)(Attack - error), (int)(Attack + error + 1));
             }
 
             target.Hit(CurrentDamage);

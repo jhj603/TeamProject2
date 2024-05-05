@@ -22,16 +22,22 @@ namespace TeamProject2
         public int MaxMP { get; private set; }
         public int CurrentDungeon { get; private set; } = 1;
         public int CurrentSkillCount { get; private set; } = 0;
+        public int MaxExp { get; private set; }
+        public int IncreaseExp { get; private set; }
+
+        Inventory inventory = null;
 
         // Player 필드 초기화 함수
-        public bool Initialize(int level, string name, PlayerJob job, int attack, int defense, int hp, int gold, int mp)        // 레벨, 이름, 직업, 공격력, 방어력, hp, 소지금을 차례로 받아 초기화에 사용
+        public bool Initialize(int level, string name, PlayerJob job, int attack, int defense, int hp, int gold, int mp, int exp = 0)        // 레벨, 이름, 직업, 공격력, 방어력, hp, 소지금을 차례로 받아 초기화에 사용
         {
-            base.Initialize(level, name, attack, hp, gold, mp);
+            base.Initialize(level, name, attack, hp, gold, mp, exp);
 
             Job = job;                                              // 자식 클래스(Player)만 갖고 있는 필드 초기화
             Defense = defense;                                      // 자식 클래스(Player)만 갖고 있는 필드 초기화
             MaxHP = hp;
             MaxMP = mp;
+            MaxExp = 10;
+            IncreaseExp = 25;
 
             Skills = new List<Skill>();
 
@@ -48,12 +54,96 @@ namespace TeamProject2
                     ++CurrentSkillCount;
             }
 
+            inventory = new Inventory();
+
             return true;
         }
 
         public void IncreaseDungeon()
         {
             ++CurrentDungeon;
+        }
+
+        public bool CanUseSkill(int skillIndex)
+        {
+            return MP > Skills[skillIndex].Cost;
+        }
+
+        public void BuyItem(BaseItem item)
+        {
+            inventory.AddItem(item);
+            Gold -= item.Gold;
+        }
+
+        public BaseItem SellItem(int index)
+        {
+            int cost = 0;
+
+            BaseItem item = inventory.SellItem(index, out cost);
+
+            Gold += cost;
+
+            return item;
+        }
+
+        public int GetEquipSize()
+        {
+            return inventory.EquipableItems.Count;
+        }
+
+        public void Equip(int index)
+        {
+            inventory.Equip(index);
+        }
+
+        public int GetPotionSize()
+        {
+            return inventory.Potions.Count;
+        }
+
+        public void UsePotion(int index)
+        {
+            BaseItem usePotion = inventory.UsePotion(index);
+
+            switch (usePotion.Type)
+            {
+                case ItemType.Potion_HP:
+                    HP += usePotion.Increase;
+
+                    if (MaxHP < HP)
+                        HP = MaxHP;
+                    break;
+                case ItemType.Potion_MP:
+                    MP += usePotion.Increase;
+
+                    if (MaxMP < MP)
+                        MP = MaxMP;
+                    break;
+                case ItemType.Potion_Atk:
+                    Attack += usePotion.Increase;
+                    break;
+                case ItemType.Potion_Dfs:
+                    Defense += usePotion.Increase;
+                    break;
+                case ItemType.Potion_Exp:
+                    LevelUp(usePotion.Increase);
+                    break;
+            }
+        }
+
+        public void LevelUp(int exp)
+        {
+            Exp += exp;
+
+            if (MaxExp <= Exp)
+            {
+                ++Level;
+                Exp = 0;
+                MaxExp += IncreaseExp;
+                IncreaseExp += 5;
+                Attack += 0.5f;
+                Defense += 1;
+            }
         }
 
         public override void PrintStatus()
@@ -115,9 +205,19 @@ namespace TeamProject2
             }
         }
 
-        public bool CanUseSkill(int skillIndex)
+        public int PrintInventory(bool isIndex = false)
         {
-            return MP > Skills[skillIndex].Cost;
+            return inventory.PrintInven(isIndex);
+        }
+
+        public void PrintEquipable()
+        {
+            inventory.PrintEquip();
+        }
+
+        public void PrintPotions()
+        {
+            inventory.PrintPotions();
         }
     }
 }

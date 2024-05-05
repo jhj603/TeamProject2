@@ -17,7 +17,7 @@ namespace TeamProject2
         {
             PrintDialogue();
 
-            switch (MenuChoice("원하시는 행동을 입력해주세요.", 0, 2))
+            switch (MenuChoice("원하시는 행동을 입력해주세요.", 0, 4))
             {
                 case 0:
                     return SceneType.End;
@@ -33,6 +33,10 @@ namespace TeamProject2
                         return SceneType.NoChange;
                     }
                     return SceneType.Battle;
+                case 3:
+                    return SceneType.Inventory;
+                case 4:
+                    return SceneType.Shop;
                 default:
                     break;
             }
@@ -48,7 +52,9 @@ namespace TeamProject2
             Console.WriteLine("이제 전투를 시작할 수 있습니다.\n");
 
             Console.WriteLine("1. 상태 보기");
-            Console.WriteLine("2. 전투 시작\n");
+            Console.WriteLine("2. 전투 시작");
+            Console.WriteLine("3. 인벤토리");
+            Console.WriteLine("4. 상점\n");
             Console.WriteLine("0. 게임 종료\n");
         }
     }

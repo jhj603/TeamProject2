@@ -65,7 +65,7 @@ namespace TeamProject2
             rand = new Random();
         }
 
-        public List<int> GetSkillDamages(int attack)
+        public List<int> GetSkillDamages(float attack)
         {
             skillDamages.Clear();
 

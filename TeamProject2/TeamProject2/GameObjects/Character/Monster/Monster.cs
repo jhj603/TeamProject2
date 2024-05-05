@@ -18,11 +18,18 @@ namespace TeamProject2
     {
         MonsterType monsterType;
 
-        public Monster(int level, MonsterType type, string name, int attack, int hp)
+        public Monster(int level, MonsterType type, string name, float attack, int hp, int exp)
         {
-            base.Initialize(level, name, attack, hp, 0, 0);
+            base.Initialize(level, name, attack, hp, 0, 0, exp);
 
             monsterType = type;
+        }
+
+        public Monster(Monster monster)
+        {
+            base.Initialize(monster.Level, monster.Name, monster.Attack, monster.HP, 0, 0, monster.Exp);
+
+            monsterType = monster.monsterType;
         }
 
         public override void PrintStatus()
