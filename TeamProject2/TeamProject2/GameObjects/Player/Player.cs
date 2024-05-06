@@ -35,7 +35,16 @@ namespace TeamProject2
             get { return currentDamage; }
         }
 
-        public bool IsCritical { get; protected set; } = false;
+        public int CurrentDungeon { get; private set; } = 1;
+        public int CurrentSkillCount { get; private set; } = 0;
+        public int Exp { get; private set; } = 0;
+        public int MaxExp { get; private set; } = 10;
+        public int IncreaseExp { get; private set; } = 25;
+        public List<Skill> Skills { get; private set; } = null;
+        public bool IsCritical { get; private set; } = false;
+        public int MP { get; private set; }
+        public int MaxMP { get; private set; }
+
         int percent = 0;
         int error = 0;
         Random rand = null;
@@ -58,7 +67,7 @@ namespace TeamProject2
 
         private int currentDamage = 0;
 
-        public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
+        public Player (int attack, int hp, int defense, int level, string name, string job, int gold, int mp)
         {
             this.attack = attack;
             this.hp = hp;
@@ -68,8 +77,22 @@ namespace TeamProject2
             this.job = job;
             this.gold = gold;
             this.maxhp = hp;
+            this.MP = mp;
+            this.MaxMP = mp;
 
             rand = new Random();  // 랜덤객채를 생성
+
+            Skills = new List<Skill>();
+
+            SkillManager skillManager = SkillManager.GetInstance();
+
+            skillManager.GetSkills(this.job, Skills);
+
+            foreach (Skill skill in Skills)
+            {
+                if (skill.Level <= level)
+                    ++CurrentSkillCount;
+            }
         }
 
         public void ShowStatus()
@@ -81,6 +104,12 @@ namespace TeamProject2
             Console.WriteLine($"방어력 : {defense}");
             Console.WriteLine($"체  력 : {hp}");
             Console.WriteLine($"Gold : {gold} G");
+
+            Console.WriteLine();
+            Console.WriteLine($"M   P  : {MP}");
+            Console.WriteLine("[스킬]");
+
+            PrintSkills();
         }
 
         public void PlayerAttack(Monster monster)
@@ -115,6 +144,8 @@ namespace TeamProject2
         {
             Console.WriteLine($"Lv. {level} {name} ({job})");            // 레벨, 이름, 직업으로 문자열 생성 후 출력
             Console.WriteLine($"HP {hp}/{maxhp}");                       // HP로 문자열 생성 후 출력
+
+            Console.WriteLine($"MP {MP} / {MaxMP}");
         }
 
         public bool IsDodge()
@@ -125,6 +156,49 @@ namespace TeamProject2
                 return true;
 
             return false;
+        }
+
+        public List<int> SkillAttack(int skillChoice, Monster monster)
+        {
+            MP -= Skills[skillChoice].Cost;
+
+            if (0 > MP)
+                MP = 0;
+
+            List<int> Damages = Skills[skillChoice].GetSkillDamages(Attack);
+
+            foreach (int damage in Damages)
+            {
+                monster.Hp -= damage;
+                // monster의 hp가 0 이하라면
+                if (monster.Hp <= 0)
+                {
+                    // monster의 hp = 0
+                    monster.Hp = 0;
+                    break;
+                }
+            }
+
+            return Damages;
+        }
+
+        public void IncreaseDungeon()
+        {
+            ++CurrentDungeon;
+        }
+
+        public bool CanUseSkill(int skillIndex)
+        {
+            return MP >= Skills[skillIndex].Cost;
+        }
+
+        public void PrintSkills()
+        {
+            for (int i = 0; i < CurrentSkillCount; ++i)
+            {
+                Console.Write($"{i + 1}. ");
+                Skills[i].PrintSkill();
+            }
         }
     }
 }
