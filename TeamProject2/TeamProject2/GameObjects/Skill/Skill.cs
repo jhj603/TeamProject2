@@ -105,6 +105,7 @@ namespace TeamProject2
             switch (Type)
             {
                 case SkillType.Single:
+                case SkillType.All:
                     Console.WriteLine("공격합니다.");
                     break;
                 case SkillType.Multi:
