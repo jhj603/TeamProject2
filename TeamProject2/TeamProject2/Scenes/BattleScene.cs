@@ -149,7 +149,16 @@ namespace TeamProject2
                     Console.WriteLine("\n");
 
                 Console.WriteLine($"Lv.{status.Level} {status.Name}");
-                Console.WriteLine($"HP {nowPlayerHp} -> {status.Hp}\n");
+
+                if (status.Hp == 0)
+                {
+                    Console.WriteLine($"HP {nowPlayerHp} -> Dead\n");
+                }
+                else
+                {
+                    Console.WriteLine($"HP {nowPlayerHp} -> {status.Hp}\n");
+                }
+
                 Console.WriteLine("0. 다음\n");
                 Console.Write(">> ");
 
@@ -236,7 +245,7 @@ namespace TeamProject2
                 // player의 레벨, 이름 으로 문자열 생성 후 출력
                 Console.WriteLine($"Lv.{status.Level} {status.Name}");
                 // starthHp와 player의 hp로 문자열 생성 후 출력
-                Console.WriteLine($"HP {startHP} -> {status.Hp}\n");
+                Console.WriteLine($"HP {startHP} -> Dead\n");
                 // 나머지 문자열 출력
                 Console.WriteLine("0. 다음");
                 Console.WriteLine();
