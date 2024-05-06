@@ -243,18 +243,9 @@ namespace TeamProject2
         public void GoShop()
         {
             if (shopScene == null)
-                shopScene = new ShopScene(status); 
+                shopScene = new ShopScene(status);
 
-            if (shopScene.Initialize() == false) 
-            {
-                // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
-                Console.WriteLine("error");
-                return;
-            }
-            else
-            {
-                shopScene.ShowShop();
-            }
+            shopScene.ShowShop();
         }
     }
 }

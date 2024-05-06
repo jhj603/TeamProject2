@@ -11,16 +11,20 @@ namespace TeamProject2
         public List<BaseItem> EquipableItems { get; private set; } = null;
         public List<BaseItem> Potions { get; private set; } = null;
 
-        Dictionary<ItemType, BaseItem> equipItems = null;
+        public Dictionary<ItemType, BaseItem> EquipItems = null;
 
-        public Inventory()
+        Player status = null;
+
+        public Inventory(Player _status)
         {
+            status = _status;
+
             EquipableItems = new List<BaseItem>();
 
-            equipItems = new Dictionary<ItemType, BaseItem>();
+            EquipItems = new Dictionary<ItemType, BaseItem>();
 
             for (ItemType i = ItemType.Weapon; i < ItemType.Potion_HP; ++i)
-                equipItems.Add(i, null);
+                EquipItems.Add(i, null);
 
             Potions = new List<BaseItem>();
         }
@@ -48,8 +52,8 @@ namespace TeamProject2
                 return item;
             }
 
-            if (equipItems[EquipableItems[index - 1].Type] == EquipableItems[index - 1])
-                equipItems[EquipableItems[index - 1].Type] = null;
+            if (EquipItems[EquipableItems[index - 1].Type] == EquipableItems[index - 1])
+                EquipItems[EquipableItems[index - 1].Type] = null;
 
             item = EquipableItems[index - 1];
 
@@ -62,15 +66,41 @@ namespace TeamProject2
 
         public void Equip(int index)
         {
-            if (equipItems[EquipableItems[index].Type] == EquipableItems[index])
-                equipItems[EquipableItems[index].Type] = null;
+            if (EquipItems[EquipableItems[index].Type] == EquipableItems[index])
+            {
+                if (ItemType.Weapon == EquipableItems[index].Type)
+                    status.IncreaseAtk -= EquipableItems[index].Increase;
+                else
+                    status.IncreaseDfs -= EquipableItems[index].Increase;
+
+                EquipItems[EquipableItems[index].Type] = null;
+            }
             else
-                equipItems[EquipableItems[index].Type] = EquipableItems[index];
+            {
+                if (null != EquipItems[EquipableItems[index].Type])
+                {
+                    if (ItemType.Weapon == EquipableItems[index].Type)
+                        status.IncreaseAtk -= EquipItems[EquipableItems[index].Type].Increase;
+                    else
+                        status.IncreaseDfs -= EquipItems[EquipableItems[index].Type].Increase;
+                }
+
+                EquipItems[EquipableItems[index].Type] = EquipableItems[index];
+
+                if (ItemType.Weapon == EquipableItems[index].Type)
+                    status.IncreaseAtk += EquipableItems[index].Increase;
+                else
+                    status.IncreaseDfs += EquipableItems[index].Increase;
+            }
         }
 
         public BaseItem UsePotion(int index)
         {
-            return Potions[index];
+            BaseItem item = Potions[index];
+
+            Potions.RemoveAt(index);
+
+            return item;
         }
 
         public int PrintInven(bool isIndex = false)
