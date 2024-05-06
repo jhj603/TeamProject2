@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,8 @@ namespace TeamProject2
         public bool IsCritical { get; private set; } = false;
         public int MP { get; private set; }
         public int MaxMP { get; private set; }
+        public float IncreaseAtk { get; set; } = 0f;
+        public int IncreaseDfs { get; set; } = 0;
 
         int percent = 0;
         int error = 0;
@@ -101,7 +104,7 @@ namespace TeamProject2
                     ++CurrentSkillCount;
             }
 
-            inventory = new Inventory();
+            inventory = new Inventory(this);
         }
 
         public void ShowStatus()
@@ -115,8 +118,19 @@ namespace TeamProject2
             Console.ResetColor();
             Console.WriteLine($" ( {job} )\n");
 
-            Console.WriteLine($"{"공격력", -3} : {attack}");
-            Console.WriteLine($"{"방어력", -3} : {defense}");
+            Console.Write($"{"공격력", -3} : {Attack + IncreaseAtk} ");
+
+            if (0f < IncreaseAtk)
+                Console.WriteLine($"(+ {IncreaseAtk})");
+            else
+                Console.WriteLine();
+
+            Console.Write($"{"방어력", -3} : {defense + IncreaseDfs} ");
+
+            if (0 < IncreaseDfs)
+                Console.WriteLine($"(+ {IncreaseDfs})");
+            else
+                Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write($"{"체  력", -3}");
@@ -151,12 +165,12 @@ namespace TeamProject2
             {
                 IsCritical = true;
 
-                currentDamage = (int)(Attack * 1.6f);
+                currentDamage = (int)((Attack + IncreaseAtk) * 1.6f);
             }
             else
             {
-                error = (int)Math.Ceiling(Attack * 0.1f);
-                currentDamage = rand.Next((int)(Attack - error), (int)(Attack + error + 1));         // 공격력 오차범위 생성
+                error = (int)Math.Ceiling((Attack + IncreaseAtk) * 0.1f);
+                currentDamage = rand.Next((int)((Attack + IncreaseAtk) - error), (int)((Attack + IncreaseAtk) + error + 1));         // 공격력 오차범위 생성
             }
 
             // monster의 hp에서 player의 attack을 뺌
@@ -203,7 +217,7 @@ namespace TeamProject2
 
         public List<int> SkillAttack(int skillChoice, Monster monster)
         {
-            List<int> Damages = Skills[skillChoice].GetSkillDamages(Attack);
+            List<int> Damages = Skills[skillChoice].GetSkillDamages((Attack + IncreaseAtk));
 
             foreach (int damage in Damages)
             {
@@ -328,15 +342,17 @@ namespace TeamProject2
         {
             Exp += exp;
 
-            if (MaxExp <= Exp)
+            while (MaxExp < Exp)
             {
                 ++Level;
-                Exp = 0;
+                Exp -= MaxExp;
                 MaxExp += IncreaseExp;
                 IncreaseExp += 5;
                 Attack += 0.5f;
                 defense += 1;
             }
         }
+
+        
     }
 }

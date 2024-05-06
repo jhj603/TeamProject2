@@ -95,7 +95,7 @@ namespace TeamProject2
                 status.PrintPotions();
 
                 Console.WriteLine("\n0. 나가기\n");
-                Console.WriteLine("장착 또는 해제하고 싶은 장비를 입력해주세요.");
+                Console.WriteLine("사용하고 싶은 포션을 입력해주세요.");
                 Console.Write(">> ");
 
                 maxCount = status.GetPotionSize();

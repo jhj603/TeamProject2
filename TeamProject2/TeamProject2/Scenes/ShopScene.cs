@@ -18,14 +18,8 @@ namespace TeamProject2
             status = _status;
 
             shop = new Shop();
-        }
 
-        public bool Initialize()
-        {
-            if (!shop.Initialize())
-                return false;
-
-            return true;
+            shop.Initialize();
         }
 
         public void ShowShop()
