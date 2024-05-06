@@ -93,7 +93,8 @@ namespace TeamProject2
 
                 if (monster.Hp == 0)
                 {
-                    Console.WriteLine($"HP {nowMonsterHp} -> Dead\n");
+                    Console.Write($"HP {nowMonsterHp} -> ");
+                    Program.ColorDarkRed("Dead\n");
                 }
                 else
                 {
@@ -152,7 +153,8 @@ namespace TeamProject2
 
                 if (status.Hp == 0)
                 {
-                    Console.WriteLine($"HP {nowPlayerHp} -> Dead\n");
+                    Console.Write($"HP {nowPlayerHp} -> ");
+                    Program.ColorDarkRed("Dead\n");
                 }
                 else
                 {
@@ -245,7 +247,8 @@ namespace TeamProject2
                 // player의 레벨, 이름 으로 문자열 생성 후 출력
                 Console.WriteLine($"Lv.{status.Level} {status.Name}");
                 // starthHp와 player의 hp로 문자열 생성 후 출력
-                Console.WriteLine($"HP {startHP} -> Dead\n");
+                Console.Write($"HP {startHP} -> ");
+                Program.ColorDarkRed("Dead\n");
                 // 나머지 문자열 출력
                 Console.WriteLine("0. 다음");
                 Console.WriteLine();
@@ -312,7 +315,7 @@ namespace TeamProject2
                 Console.WriteLine();
 
                 // "[내정보]" 출력
-                Console.WriteLine("[내정보]");
+                Program.ColorDarkYellow("[내정보]");
 
                 // Player.ShowDungeonStatus() 호출
                 status.ShowDungeonStatus();
@@ -366,14 +369,16 @@ namespace TeamProject2
                 for (int i = 0; i < monsters.Count; i++)
                 {
                     // Monster.ShowMonsterStatus() 호출
-                    Console.Write($"{i + 1} ");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{i + 1}] ");
+                    Console.ResetColor();
                     monsters[i].ShowMonsterStatus();        // 숫자를 앞에 붙여 선택할 수 있게 해야 함
                 }
                 Console.WriteLine("=====================================");
                 Console.WriteLine();
 
                 // "[내정보]" 출력
-                Console.WriteLine("[내정보]");
+                Program.ColorDarkYellow("[내정보]");
 
                 // Player.ShowDungeonStatus() 호출
                 status.ShowDungeonStatus();

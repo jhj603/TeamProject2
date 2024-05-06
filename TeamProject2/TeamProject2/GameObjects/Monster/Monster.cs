@@ -94,7 +94,9 @@ namespace TeamProject2
             // HP 0 이면 Dead 나옴
             if (0 == Hp)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(" Dead");
+                Console.ResetColor();
             }
             else
             {
