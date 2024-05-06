@@ -22,11 +22,16 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("인벤토리");
+                Program.ColorDarkCyan("[ 인벤토리 ]");
+                Console.ResetColor();
+                //Console.WriteLine("인벤토리");
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
 
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("1. 장착 관리");
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("2. 포션 사용\n");
+                Console.ResetColor();
 
                 Console.WriteLine("0. 나가기\n");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
