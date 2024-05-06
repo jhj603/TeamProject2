@@ -195,11 +195,6 @@ namespace TeamProject2
 
         public List<int> SkillAttack(int skillChoice, Monster monster)
         {
-            MP -= Skills[skillChoice].Cost;
-
-            if (0 > MP)
-                MP = 0;
-
             List<int> Damages = Skills[skillChoice].GetSkillDamages(Attack);
 
             foreach (int damage in Damages)
@@ -234,6 +229,14 @@ namespace TeamProject2
                 Console.Write($"{i + 1}. ");
                 Skills[i].PrintSkill();
             }
+        }
+
+        public void UseMP(int cost)
+        {
+            MP -= cost;
+
+            if (0 > MP)
+                MP = 0;
         }
     }
 }

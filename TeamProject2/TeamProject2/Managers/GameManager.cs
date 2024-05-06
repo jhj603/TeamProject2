@@ -51,7 +51,7 @@ namespace TeamProject2
                     {
                         if (jobNumInput == 1)
                         {
-                            status = new Player(10, 100, 5, 1, nameInput, "전사", 1500, 50);    // Player 객체 생성
+                            status = new Player(10, 100, 5, 10, nameInput, "전사", 1500, 50);    // Player 객체 생성
                             break;
                         }
                         else if (jobNumInput == 2)
@@ -66,7 +66,7 @@ namespace TeamProject2
                         }
                         else if (jobNumInput == 4)
                         {
-                            status = new Player(18, 80, 5, 10, nameInput, "궁수", 1500, 50);
+                            status = new Player(18, 80, 5, 1, nameInput, "궁수", 1500, 50);
                             break;
                         }
                         else if (jobNumInput == 5)

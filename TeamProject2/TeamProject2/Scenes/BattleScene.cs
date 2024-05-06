@@ -612,7 +612,7 @@ namespace TeamProject2
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
 
                 Console.WriteLine("0. 다음");
-
+                Console.Write(">> ");
                 string input = Console.ReadLine();                     // 입력
 
                 if ("0" == input)
@@ -638,7 +638,7 @@ namespace TeamProject2
                 Console.WriteLine($"{status.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
 
                 Console.WriteLine("0. 다음");
-
+                Console.Write(">> ");
                 string input = Console.ReadLine();
 
                 if ("0" == input)
@@ -702,6 +702,10 @@ namespace TeamProject2
                     }
                     else if (0 == playerChoice)
                         return;
+                    else
+                    {
+                        Program.InputError();
+                    }
                 }
                 else 
                 {
@@ -753,6 +757,8 @@ namespace TeamProject2
                 if (isEscape)
                     break;
             }
+
+            status.UseMP(status.Skills[skillChoice].Cost);
 
             foreach (int index in listRandIndex)
             {
@@ -824,6 +830,8 @@ namespace TeamProject2
 
             int monsterHP = 0;
 
+            status.UseMP(status.Skills[skillChoice].Cost);
+
             foreach (Monster monster in monsters)
             {
                 listPreHP.Add(monster.Hp);
@@ -890,6 +898,8 @@ namespace TeamProject2
         void PlayerSkillAttack(int skillChoice, int playerChoice)
         {
             int monsterHP = monsters[playerChoice].Hp;
+
+            status.UseMP(status.Skills[skillChoice].Cost);
 
             List<int> skillDamages = status.SkillAttack(skillChoice, monsters[playerChoice]);
 
