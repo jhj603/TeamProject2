@@ -79,7 +79,7 @@ namespace TeamProject2
                 if (0 == itemDict[item.Name])
                     Console.WriteLine("|구매 완료");
                 else
-                    Console.WriteLine($"|{item.Gold} G");
+                    Console.WriteLine($"|{item.Gold, 7} G");
             }
         }
     }
