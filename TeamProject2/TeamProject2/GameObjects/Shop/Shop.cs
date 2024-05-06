@@ -57,7 +57,7 @@ namespace TeamProject2
         public void SellItem(BaseItem item)
         {
             if (ItemType.Potion_HP > item.Type)
-                ++itemDict[item.Name];
+                itemDict[item.Name] = 1;
         }
 
         public void PrintItemList(bool isIndex = false)

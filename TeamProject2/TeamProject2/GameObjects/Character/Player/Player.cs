@@ -112,6 +112,9 @@ namespace TeamProject2
 
                     if (MaxHP < HP)
                         HP = MaxHP;
+
+                    if (CharacterState.Dead == CurrentState)
+                        CurrentState = CharacterState.Alive;
                     break;
                 case ItemType.Potion_MP:
                     MP += usePotion.Increase;

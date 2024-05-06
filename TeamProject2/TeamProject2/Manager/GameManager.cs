@@ -102,6 +102,11 @@ namespace TeamProject2
                             }
                             break;
                         case SceneType.Quest:
+                            if (!ChangeScene())
+                            {
+                                Console.WriteLine("씬 변경 실패!");
+                                return;
+                            }
                             break;
                         case SceneType.End:
                             return;
@@ -137,6 +142,7 @@ namespace TeamProject2
                         scene = new ShopScene();
                         break;
                     case SceneType.Quest:
+                        scene = new QuestScene();
                         break;
                 }               
             }

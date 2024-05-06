@@ -16,20 +16,20 @@ namespace TeamProject2
 
     internal class Monster : BaseCharacter
     {
-        MonsterType monsterType;
+        public MonsterType MonType { get; private set; }
 
         public Monster(int level, MonsterType type, string name, float attack, int hp, int exp)
         {
             base.Initialize(level, name, attack, hp, 0, 0, exp);
 
-            monsterType = type;
+            MonType = type;
         }
 
         public Monster(Monster monster)
         {
             base.Initialize(monster.Level, monster.Name, monster.Attack, monster.HP, 0, 0, monster.Exp);
 
-            monsterType = monster.monsterType;
+            MonType = monster.MonType;
         }
 
         public override void PrintStatus()

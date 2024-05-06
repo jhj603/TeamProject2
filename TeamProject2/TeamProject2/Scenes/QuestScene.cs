@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace TeamProject2
 {
-    internal class MainScene : Scene
+    internal class QuestScene : Scene
     {
+        QuestManager questManager = null;
+
         public override bool Initialize(Player playerInstance)
         {
+            questManager = QuestManager.GetInstance();
+
+            if (null == questManager)
+                return false;
+
             return base.Initialize(playerInstance);
         }
 
@@ -17,7 +24,7 @@ namespace TeamProject2
         {
             PrintDialogue();
 
-            switch (MenuChoice("원하시는 행동을 입력해주세요.", 0, 5))
+            switch (MenuChoice("원하시는 퀘스트를 선택해주세요.", 0, 5))
             {
                 case 0:
                     return SceneType.End;
@@ -50,15 +57,11 @@ namespace TeamProject2
         {
             Console.Clear();
 
-            Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
-            Console.WriteLine("이제 전투를 시작할 수 있습니다.\n");
+            Console.WriteLine("Quest!!\n");
 
-            Console.WriteLine("1. 상태 보기");
-            Console.WriteLine("2. 전투 시작");
-            Console.WriteLine("3. 인벤토리");
-            Console.WriteLine("4. 상점");
-            Console.WriteLine("5. 퀘스트\n");
-            Console.WriteLine("0. 게임 종료\n");
+            questManager.PrintQuests();
+            
+            Console.WriteLine("\n0. 나가기\n");
         }
     }
 }

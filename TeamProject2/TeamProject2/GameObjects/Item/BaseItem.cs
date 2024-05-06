@@ -16,7 +16,8 @@ namespace TeamProject2
         Potion_MP,
         Potion_Atk,
         Potion_Dfs,
-        Potion_Exp
+        Potion_Exp,
+        ItemTypeEnd
     }
 
     internal class BaseItem

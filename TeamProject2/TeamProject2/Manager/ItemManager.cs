@@ -54,5 +54,18 @@ namespace TeamProject2
                     items.Add(new BaseItem(item));
             }
         }
+
+        public BaseItem FindItem(ItemType type, string name)
+        {
+            BaseItem findItem = null;
+
+            foreach (BaseItem item in itemDict[type])
+            {
+                if (name == item.Name)
+                    findItem = item;
+            }
+
+            return findItem;
+        }
     }
 }
