@@ -86,18 +86,22 @@ namespace TeamProject2
 
         public void ShowMonsterStatus()     
         {
-            Console.Write($"Lv.{Level}    ");
-            Console.Write(ConsoleUtility.PadRightForMixedText(Name, 14));
+            Console.Write("Lv.");
+            Console.Write($"{Level}   ");
+            Console.Write(ConsoleUtility.PadRightForMixedText(Name, 13));
+            Console.ResetColor();
 
             // HP 0 이면 Dead 나옴
             if (0 == Hp)
             {
-                Console.WriteLine("Dead");
+                Console.WriteLine(" Dead");
             }
             else
             {
                 // 레벨, 이름, hp로 문자열 출력
-                Console.WriteLine($"HP {Hp}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($" HP {Hp}");
+                Console.ResetColor();
             }
         }
 
