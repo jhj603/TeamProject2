@@ -143,7 +143,7 @@ namespace TeamProject2
                 Console.Write("상점");
                 Console.ResetColor();
                 Console.WriteLine(" - 아이템 판매");
-                Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
+                Console.WriteLine("필요없는 아이템을 팔 수 있는 상점입니다.\n");
 
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("[보유 골드]");
