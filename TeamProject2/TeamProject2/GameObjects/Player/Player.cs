@@ -68,12 +68,12 @@ namespace TeamProject2
         public void ShowStatus()
         {
             // 플레이어 필드를 사용해 문자열 생성 후 출력
-            Console.WriteLine($"Lv. {0:D1}{level}");            
+            Console.WriteLine($"Lv. {0:D1}{level}");
             Console.WriteLine($"{name} ( {job} )");
             Console.WriteLine($"공격력 : {attack}");
             Console.WriteLine($"방어력 : {defense}");
             Console.WriteLine($"체  력 : {hp}");
-            Console.WriteLine($"Gold : {gold} G");      
+            Console.WriteLine($"Gold : {gold} G");
         }
 
         public void PlayerAttack(Monster monster)
