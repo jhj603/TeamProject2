@@ -51,27 +51,27 @@ namespace TeamProject2
                     {
                         if (jobNumInput == 1)
                         {
-                            status = new Player(10, 100, 5, 1, nameInput, "전사", 1500);    // Player 객체 생성
+                            status = new Player(10, 100, 5, 1, nameInput, "전사", 1500, 50);    // Player 객체 생성
                             break;
                         }
                         else if (jobNumInput == 2)
                         {
-                            status = new Player(13, 90, 5, 1, nameInput, "마법사", 1500);
+                            status = new Player(13, 90, 5, 10, nameInput, "마법사", 1500, 50);
                             break;
                         }
                         else if (jobNumInput == 3)
                         {
-                            status = new Player(15, 85, 5, 1, nameInput, "도적", 1500);
+                            status = new Player(15, 85, 5, 1, nameInput, "도적", 1500, 50);
                             break;
                         }
                         else if (jobNumInput == 4)
                         {
-                            status = new Player(18, 80, 5, 1, nameInput, "궁수", 1500);
+                            status = new Player(18, 80, 5, 10, nameInput, "궁수", 1500, 50);
                             break;
                         }
                         else if (jobNumInput == 5)
                         {
-                            status = new Player(random.Next(10, 21), random.Next(80,101), 5, 1, nameInput, "?????", random.Next(0, 10001));
+                            status = new Player(random.Next(10, 21), random.Next(80,101), 5, 1, nameInput, "?????", random.Next(0, 10001), random.Next(30, 81));
                             break;
                         }
                         else
@@ -105,12 +105,16 @@ namespace TeamProject2
                 Console.Write("2. ");
                 Program.ColorDarkRed("전투 시작\n\n");
 
+                Console.WriteLine("0. 게임 종료\n");
+
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
                 string input = Console.ReadLine();  // 입력
 
                 switch(input)
                 {
+                    case "0":
+                        return;
                     case "1":   // 1. 상태 보기 입력
                         ShowPlayerStatus();    // ShowPlayerStatus() 호출
                         break;

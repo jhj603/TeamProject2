@@ -323,6 +323,9 @@ namespace TeamProject2
                 // 나머지 문자열 출력
                 Console.WriteLine();
                 Console.WriteLine("1. 공격");
+                Console.WriteLine("2. 스킬");
+                Console.WriteLine();
+                Console.WriteLine("0. 도망가기");
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
@@ -332,6 +335,8 @@ namespace TeamProject2
 
                 switch (number)
                 {
+                    case "0":
+                        return;
                     // 1. 입력
                     case "1":
                         // Battle.ShowMonsterChoice() 수행 후 반환 값이 true일 때
@@ -339,6 +344,41 @@ namespace TeamProject2
                         {
                             // ShowBattle() 함수 나가기
                             return;
+                        }
+                        break;
+                    case "2":
+                        if (true == ShowSkillChoice())
+                        {
+                            if (true == MonsterDeadCheck())
+                            {
+                                // Battle.PlayerVictory 수행 후 true 반환
+                                PlayerVictory();
+                                return;
+                            }
+
+                            for (int i = 0; i < monsters.Count; ++i)
+                            {
+                                // 안죽은 몬스터면 공격을 해라
+                                if (0 < monsters[i].Hp)
+                                {
+                                    if (status.IsDodge())
+                                    {
+                                        PrintPlayerDodge(monsters[i]);
+                                    }
+                                    else
+                                    {
+                                        // Battle.PlayerHit(monster) 수행
+                                        PlayerHit(monsters[i]);
+                                        // player가 죽었으면
+                                        if (0 == status.Hp)
+                                        {
+                                            // Battle.PlayerLose 수행 후 true 반환
+                                            PlayerLose();
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         break;
                     // 1 제외 숫자 입력
@@ -467,6 +507,99 @@ namespace TeamProject2
             return false;   // bool을 반환 타입으로 갖는 함수는 항상 bool 값을 반환해야 함
         }
 
+        bool ShowSkillChoice()
+        {
+            while (true)
+            {
+                // 콘솔 창 출력 지워줌.
+                Console.Clear();
+
+                // "Battle!!" 문자열 출력
+                Program.ColorDarkRed("Battle!!\n\n");
+
+                Console.WriteLine("=====================================");
+                // monsters의 크기만큼 반복
+                for (int i = 0; i < monsters.Count; i++)
+                {
+                    // Monster.ShowMonsterStatus() 호출
+                    Console.Write($"{i + 1} ");
+                    monsters[i].ShowMonsterStatus();        // 숫자를 앞에 붙여 선택할 수 있게 해야 함
+                }
+                Console.WriteLine("=====================================");
+                Console.WriteLine();
+
+                // "[내정보]" 출력
+                Console.WriteLine("[내정보]");
+
+                // Player.ShowDungeonStatus() 호출
+                status.ShowDungeonStatus();
+
+                status.PrintSkills();
+
+                Console.WriteLine();
+                Console.WriteLine("0. 뒤로");
+                Console.WriteLine();
+
+                int skillCount = status.CurrentSkillCount;
+
+                string input = Console.ReadLine();                               // 입력
+                int skillChoice;
+
+                if (int.TryParse(input, out skillChoice))
+                {
+                    if (skillChoice > 0 && skillChoice <= skillCount)                       
+                    {
+                        switch (status.Skills[skillChoice - 1].Type)
+                        {
+                            case SkillType.Single:
+                            case SkillType.Multi:
+                                if (status.CanUseSkill(skillChoice - 1))
+                                {
+                                    ChoiceSkillMonster(skillChoice - 1);
+                                    return true;
+                                }
+                                else
+                                    break;
+                            case SkillType.Random:
+                                if (status.CanUseSkill(skillChoice - 1))
+                                {
+                                    RandomSkillMonster(skillChoice - 1);
+                                    return true;
+                                }
+                                else
+                                    break;
+                            case SkillType.All:
+                                if (status.CanUseSkill(skillChoice - 1))
+                                {
+                                    AllSkillMonster(skillChoice - 1);
+                                    return true;
+                                }
+                                else
+                                    break;
+                        }
+
+                        Console.WriteLine("\nMP가 부족합니다..!");
+
+                        Thread.Sleep(1000);
+                    }
+                    else if (0 == skillCount)
+                    {
+                        return false;
+                    }
+                    else                                                       
+                    {
+                        Program.InputError();                                  
+                    }
+                }
+                else                                                           
+                {
+                    Program.InputError();                                      
+                }
+            }
+
+            return false;
+        }
+
         void PrintMonsterDodge(Monster monster)
         {
             while (true)
@@ -517,6 +650,304 @@ namespace TeamProject2
                     Program.InputError();                              // "잘못된 입력입니다." 출력
                 }
             }
+        }
+
+        void ChoiceSkillMonster(int skillChoice)
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!");
+                Console.WriteLine("");
+
+                for (int i = 0; i < monsters.Count; ++i)
+                {
+                    Console.Write($"[{i + 1}] ");
+                    monsters[i].ShowMonsterStatus();
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("[내정보]\n");
+
+                status.ShowDungeonStatus();
+
+                Console.WriteLine("");
+
+                Console.WriteLine($"선택된 스킬 : {status.Skills[skillChoice].Name}\n");
+
+                Console.WriteLine("0. 턴 넘기기");
+                Console.WriteLine("");
+
+                Console.WriteLine("대상을 선택해주세요.");
+                Console.Write(">> ");
+
+                string input = Console.ReadLine();
+                int playerChoice;
+
+                if (int.TryParse(input, out playerChoice))
+                {
+                    if ((0 < playerChoice) && (monsters.Count >= playerChoice))
+                    {
+                        if (0 == monsters[playerChoice - 1].Hp)
+                        {
+                            Console.WriteLine("\n해당 몬스터는 이미 죽었습니다..!");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            PlayerSkillAttack(skillChoice, playerChoice - 1);
+                            return;
+                        }
+                    }
+                    else if (0 == playerChoice)
+                        return;
+                }
+                else 
+                {
+                    Program.InputError();
+                }
+            }
+        }
+
+        void RandomSkillMonster(int skillChoice)
+        {
+            bool[] isAttack = new bool[monsters.Count];
+            List<int> listRandIndex = new List<int>();
+            List<int> listPreHP = new List<int>();
+            List<List<int>> listDamages = new List<List<int>>();
+            Random random = new Random();
+
+            int count = 0;
+            int randIndex = 0;
+            int monsterHP = 0;
+
+            bool isEscape = true;
+
+            while (count != Math.Min(monsters.Count, status.Skills[skillChoice].TargetCount))
+            {
+                isEscape = true;
+
+                randIndex = random.Next(0, monsters.Count);
+
+                if (!isAttack[randIndex])
+                {
+                    if (0 < monsters[randIndex].Hp)
+                    {
+                        ++count;
+                        listRandIndex.Add(randIndex);
+                    }
+
+                    isAttack[randIndex] = true;
+                }
+
+                for (int i = 0; i < isAttack.Length; ++i)
+                {
+                    if (!isAttack[i])
+                    {
+                        isEscape = false;
+                        break;
+                    }
+                }
+
+                if (isEscape)
+                    break;
+            }
+
+            foreach (int index in listRandIndex)
+            {
+                listPreHP.Add(monsters[index].Hp);
+                listDamages.Add(new List<int>(status.SkillAttack(skillChoice, monsters[index])));
+            }
+
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!\n");
+
+                Console.WriteLine($"{status.Name} 의 {status.Skills[skillChoice].Name}!\n");
+
+                for (int i = 0; i < listRandIndex.Count; ++i)
+                {
+                    monsterHP = listPreHP[i];
+
+                    for (int j = 0; j < listDamages[i].Count; ++j)
+                    {
+                        if (0 < monsterHP)
+                        {
+                            Console.WriteLine("--------------------------------------------");
+                            Console.Write($"Lv.{monsters[listRandIndex[i]].Level} {monsters[listRandIndex[i]].Name} 을(를) 맞췄습니다! ");
+                            Console.WriteLine($"[데미지 : {listDamages[i][j]}]\n");
+
+                            Console.WriteLine($"Lv.{monsters[listRandIndex[i]].Level} {monsters[listRandIndex[i]].Name}");
+
+                            Console.Write($"HP {monsterHP} -> ");
+
+                            monsterHP -= listDamages[i][j];
+
+                            if (0 >= monsterHP)
+                                Console.WriteLine("Dead\n");
+                            else
+                                Console.WriteLine($"{monsterHP}\n");
+                        }
+                        else
+                            break;
+                    }
+                }
+
+                Console.WriteLine("0. 다음");
+
+                Console.Write(">> ");
+
+                string input = Console.ReadLine();
+                int playerChoice;
+
+                if (int.TryParse(input, out playerChoice))
+                {
+                    if (0 == playerChoice)
+                        return;
+                    else
+                        Program.InputError();
+                }
+                else
+                {
+                    Program.InputError();
+                }
+            }
+        }
+
+        void AllSkillMonster(int skillChoice)
+        {
+            List<int> listPreHP = new List<int>();
+            List<List<int>> listDamages = new List<List<int>>();
+
+            int monsterHP = 0;
+
+            foreach (Monster monster in monsters)
+            {
+                listPreHP.Add(monster.Hp);
+                listDamages.Add(new List<int>(status.SkillAttack(skillChoice, monster)));
+            }
+
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!\n");
+
+                Console.WriteLine($"{status.Name} 의 {status.Skills[skillChoice].Name}!\n");
+
+                for (int i = 0; i < monsters.Count; ++i)
+                {
+                    monsterHP = listPreHP[i];
+
+                    for (int j = 0; j < listDamages[i].Count; ++j)
+                    {
+                        if (0 < monsterHP)
+                        {
+                            Console.WriteLine("--------------------------------------------");
+                            Console.Write($"Lv.{monsters[i].Level} {monsters[i].Name} 을(를) 맞췄습니다! ");
+                            Console.WriteLine($"[데미지 : {listDamages[i][j]}]\n");
+
+                            Console.WriteLine($"Lv.{monsters[i].Level} {monsters[i].Name}");
+
+                            Console.Write($"HP {monsterHP} -> ");
+
+                            monsterHP -= listDamages[i][j];
+
+                            if (0 >= monsterHP)
+                                Console.WriteLine("Dead\n");
+                            else
+                                Console.WriteLine($"{monsterHP}\n");
+                        }
+                        else
+                            break;
+                    }
+                }
+
+                Console.WriteLine("0. 다음");
+
+                Console.Write(">> ");
+
+                string input = Console.ReadLine();
+                int playerChoice;
+
+                if (int.TryParse(input, out playerChoice))
+                {
+                    if (0 == playerChoice)
+                        return;
+                    else
+                        Program.InputError();
+                }
+                else
+                {
+                    Program.InputError();
+                }
+            }
+        }
+
+        void PlayerSkillAttack(int skillChoice, int playerChoice)
+        {
+            int monsterHP = monsters[playerChoice].Hp;
+
+            List<int> skillDamages = status.SkillAttack(skillChoice, monsters[playerChoice]);
+
+            while (true)
+            {
+                PrintPlayerSkill(monsters[playerChoice], monsterHP, skillChoice, skillDamages);
+
+                string input = Console.ReadLine();
+                int menuChoice;
+
+                if (int.TryParse(input, out menuChoice))
+                {
+                    if (0 == menuChoice)
+                        return;
+                    else
+                    {
+                        Program.InputError();
+                    }
+                }
+                else
+                {
+                    Program.InputError();
+                }
+            }
+        }
+
+        void PrintPlayerSkill(Monster monster, int preHP, int skillIndex, List<int> skillDamages)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Battle!!\n");
+
+            Console.WriteLine($"{status.Name} 의 {status.Skills[skillIndex].Name}!\n");
+
+            foreach (int damage in skillDamages)
+            {
+                if (0 < preHP)
+                {
+                    Console.WriteLine("--------------------------------------------"); 
+                    Console.Write($"Lv.{monster.Level} {monster.Name} 을(를) 맞췄습니다! ");
+                    Console.WriteLine($"[데미지 : {damage}]\n");
+
+                    Console.WriteLine($"Lv.{monster.Level} {monster.Name}");
+
+                    Console.Write($"HP {preHP} -> ");
+
+                    preHP -= damage;
+
+                    if (0 >= preHP)
+                        Console.WriteLine("Dead\n");
+                    else
+                        Console.WriteLine($"{preHP}\n");
+                }
+                else
+                    break;
+            }
+
+            Console.WriteLine("0. 다음");
         }
     }
 }
