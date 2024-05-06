@@ -18,8 +18,11 @@ namespace TeamProject2
 
             if(status == null)  // status == null이면
             {
-                Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+                Console.WriteLine("육회 던전에 오신 여러분 환영합니다.\n");
+
+                Program.ColorDarkCyan("[ 닉네임 ]");
                 Console.WriteLine("원하시는 이름을 설정해주세요.\n");
+
                 Console.Write(">> ");
 
                 string nameInput = Console.ReadLine();
@@ -28,12 +31,15 @@ namespace TeamProject2
                 {
                     Console.Clear();
 
+                    Program.ColorDarkCyan("[ 직업선택 ]");
                     Console.WriteLine("원하는 직업을 선택해주세요.\n");
+
                     Console.WriteLine("1. 전사");
                     Console.WriteLine("2. 마법사");
                     Console.WriteLine("3. 도적");
                     Console.WriteLine("4. 궁수");
                     Console.WriteLine("5. ?????\n");
+
                     Console.Write(">> ");
 
                     Random random = new Random();
@@ -85,6 +91,7 @@ namespace TeamProject2
                 // 게임 시작 화면 출력
                 Console.Clear();
 
+                Program.ColorDarkCyan("[ 마을 ]");
                 Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
                 Console.WriteLine("이제 전투를 시작할 수 있습니다.\n");
 
@@ -118,7 +125,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Program.ColorYellow("상태 보기");                      // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
+                Program.ColorDarkCyan("[ 상태 보기 ]");                      // 상태 보기 화면("캐릭터의 정보가 표시됩니다." 까지) 출력
                 Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
 
                 Console.WriteLine("=====================================");

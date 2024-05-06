@@ -28,5 +28,12 @@
             Console.WriteLine(text);
             Console.ResetColor();
         }
+
+        public static void ColorDarkCyan(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
     }
 }
