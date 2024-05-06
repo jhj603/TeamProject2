@@ -73,7 +73,8 @@ namespace TeamProject2
             Console.WriteLine($"공격력 : {attack}");
             Console.WriteLine($"방어력 : {defense}");
             Console.WriteLine($"체  력 : {hp}");
-            Console.WriteLine($"Gold : {gold} G");      
+            Console.WriteLine($"Gold : {gold} G");
+            Console.Write(ConsoleUtility.PadRightForMixedText("Gold", 12));
         }
 
         public void PlayerAttack(Monster monster)

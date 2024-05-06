@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace TeamProject2
 {
@@ -284,7 +285,7 @@ namespace TeamProject2
                 {
                     // Monster.ShowMonsterStatus() 호출
                     monsters[i].ShowMonsterStatus();
-                }
+                }              
                 Console.WriteLine("=====================================");
                 Console.WriteLine();
 

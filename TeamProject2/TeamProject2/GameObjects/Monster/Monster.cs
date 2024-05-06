@@ -63,7 +63,8 @@ namespace TeamProject2
 
         public void ShowMonsterStatus()     
         {
-            Console.Write($"Lv.{Level} {Name} ");
+            Console.Write($"Lv.{Level}    ");
+            Console.Write(ConsoleUtility.PadRightForMixedText(Name, 14));
 
             // HP 0 이면 Dead 나옴
             if (0 == Hp)
