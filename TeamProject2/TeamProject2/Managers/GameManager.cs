@@ -13,6 +13,7 @@ namespace TeamProject2
         BattleScene battleScene = null;     // 배틀씬 객체
         InventoryScene invenScene = null;
         ShopScene shopScene = null;
+        QuestScene questScene = null;
 
         public void ShowMainScene()
         {
@@ -109,7 +110,9 @@ namespace TeamProject2
                 
                 Console.WriteLine("3. 인벤토리");
                 Console.WriteLine("4. 상점");
+                Console.WriteLine("5. 퀘스트");
 
+                Console.WriteLine();
                 Console.WriteLine("0. 게임 종료\n");
 
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -131,6 +134,9 @@ namespace TeamProject2
                         break;
                     case "4":
                         GoShop();
+                        break;
+                    case "5":
+                        ShowQuest();
                         break;
                     default:    // 1, 2 제외, 문자 입력 숫자 입력
                         Program.InputError(); // "잘못된 입력입니다." 출력
@@ -246,6 +252,14 @@ namespace TeamProject2
                 shopScene = new ShopScene(status);
 
             shopScene.ShowShop();
+        }
+
+        public void ShowQuest()
+        {
+            if (questScene == null)
+                questScene = new QuestScene(status);
+
+            questScene.ShowQuest();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace TeamProject2
         public int Gold
         {
             get { return gold; }
-            private set { gold = value; }
+            set { gold = value; }
         }
 
         public int CurrentDungeon { get; private set; } = 1;
@@ -180,6 +180,21 @@ namespace TeamProject2
             {
                 // monster의 hp = 0
                 monster.Hp = 0;
+
+                QuestManager questManager = QuestManager.GetInstance();
+
+                if (null != questManager)
+                {
+                    HuntQuest huntQuest = null;
+
+                    foreach (Quest quest in questManager.ProgressList)
+                    {
+                        huntQuest = (quest as HuntQuest);
+
+                        if (null != huntQuest)
+                            huntQuest.CheckFinish(monster);
+                    }
+                }
             }
         }
 
@@ -232,6 +247,22 @@ namespace TeamProject2
                 {
                     // monster의 hp = 0
                     monster.Hp = 0;
+
+                    QuestManager questManager = QuestManager.GetInstance();
+
+                    if (null != questManager)
+                    {
+                        HuntQuest huntQuest = null;
+
+                        foreach (Quest quest in questManager.ProgressList)
+                        {
+                            huntQuest = (quest as HuntQuest);
+
+                            if (null != huntQuest)
+                                huntQuest.CheckFinish(monster);
+                        }
+                    }
+
                     break;
                 }
             }
@@ -275,6 +306,11 @@ namespace TeamProject2
         {
             inventory.AddItem(item);
             Gold -= item.Gold;
+        }
+
+        public void GetItem(BaseItem item)
+        {
+            inventory.AddItem(item);
         }
 
         public BaseItem SellItem(int index)
@@ -357,7 +393,5 @@ namespace TeamProject2
                 defense += 1;
             }
         }
-
-        
     }
 }

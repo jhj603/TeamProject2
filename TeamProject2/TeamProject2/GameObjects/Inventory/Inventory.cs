@@ -150,7 +150,7 @@ namespace TeamProject2
             {
                 Console.Write($" - {i + 1} ");
 
-                if (equipItems[EquipableItems[i].Type] == EquipableItems[i])
+                if (EquipItems[EquipableItems[i].Type] == EquipableItems[i])
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("[E] ");
