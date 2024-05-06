@@ -135,8 +135,21 @@ namespace TeamProject2
 
         public void ShowDungeonStatus()
         {
-            Console.WriteLine($"Lv. {level} {name} ({job})");            // 레벨, 이름, 직업으로 문자열 생성 후 출력
-            Console.WriteLine($"HP {hp}/{maxhp}");                       // HP로 문자열 생성 후 출력
+            // 레벨, 이름, 직업으로 문자열 생성 후 출력
+            Console.Write($"Lv. {0:D1}{level} ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{name}");
+            Console.ResetColor();
+            Console.WriteLine($" ( {job} )");
+
+            // HP로 문자열 생성 후 출력
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"HP  {hp}");
+            Console.ResetColor();
+            Console.Write(" / ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{maxhp}");
+            Console.ResetColor();
         }
 
         public bool IsDodge()
