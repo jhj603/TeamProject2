@@ -538,8 +538,8 @@ namespace TeamProject2
 
                 Console.WriteLine();
                 Console.WriteLine("0. 뒤로");
-                Console.WriteLine();
-
+                Console.Write(">> ");
+                
                 int skillCount = status.CurrentSkillCount;
 
                 string input = Console.ReadLine();                               // 입력
@@ -582,7 +582,7 @@ namespace TeamProject2
 
                         Thread.Sleep(1000);
                     }
-                    else if (0 == skillCount)
+                    else if (0 == skillChoice)
                     {
                         return false;
                     }

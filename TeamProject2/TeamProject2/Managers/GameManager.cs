@@ -11,6 +11,8 @@ namespace TeamProject2
     {
         Player status = null;               // 플레이어 객체
         BattleScene battleScene = null;     // 배틀씬 객체
+        InventoryScene invenScene = null;
+        ShopScene shopScene = null;
 
         public void ShowMainScene()
         {
@@ -51,22 +53,22 @@ namespace TeamProject2
                     {
                         if (jobNumInput == 1)
                         {
-                            status = new Player(10, 100, 5, 10, nameInput, "전사", 1500, 50);    // Player 객체 생성
+                            status = new Player(10, 100, 5, 10, nameInput, "전사", 15000, 50);    // Player 객체 생성
                             break;
                         }
                         else if (jobNumInput == 2)
                         {
-                            status = new Player(13, 90, 5, 10, nameInput, "마법사", 1500, 50);
+                            status = new Player(13, 90, 5, 10, nameInput, "마법사", 15000, 50);
                             break;
                         }
                         else if (jobNumInput == 3)
                         {
-                            status = new Player(15, 85, 5, 1, nameInput, "도적", 1500, 50);
+                            status = new Player(15, 85, 5, 1, nameInput, "도적", 15000, 50);
                             break;
                         }
                         else if (jobNumInput == 4)
                         {
-                            status = new Player(18, 80, 5, 1, nameInput, "궁수", 1500, 50);
+                            status = new Player(18, 80, 5, 1, nameInput, "궁수", 15000, 50);
                             break;
                         }
                         else if (jobNumInput == 5)
@@ -104,6 +106,9 @@ namespace TeamProject2
                 Program.ColorYellow("상태 보기");
                 Console.Write("2. ");
                 Program.ColorDarkRed("전투 시작\n\n");
+                
+                Console.WriteLine("3. 인벤토리");
+                Console.WriteLine("4. 상점");
 
                 Console.WriteLine("0. 게임 종료\n");
 
@@ -120,6 +125,12 @@ namespace TeamProject2
                         break;
                     case "2":   // 2. 전투 시작 입력
                         GoDungeon();   // GoDungeon() 호출
+                        break;
+                    case "3":
+                        ShowInventory();
+                        break;
+                    case "4":
+                        GoShop();
                         break;
                     default:    // 1, 2 제외, 문자 입력 숫자 입력
                         Program.InputError(); // "잘못된 입력입니다." 출력
@@ -177,7 +188,7 @@ namespace TeamProject2
             {
                 // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
                 Console.WriteLine("error");
-                ShowMainScene();
+                return;
             }
 
             else// Battle.MonsterSpawn() 수행이 성공하면
@@ -185,7 +196,6 @@ namespace TeamProject2
                 // Battle.ShowBattle() 수행
                 battleScene.ShowBattle();
             }
-
         }
 
         public void StartScene()
@@ -211,6 +221,40 @@ namespace TeamProject2
             Console.ReadKey();
 
             ShowMainScene();        // GameManager의 ShowMainScene() 함수 수행
+        }
+
+        public void ShowInventory()
+        {
+            if (invenScene == null)
+                invenScene = new InventoryScene(status);
+
+            if (null == invenScene)
+            {
+                // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
+                Console.WriteLine("error");
+                return;
+            }
+            else
+            {
+                invenScene.ShowInven();
+            }
+        }
+
+        public void GoShop()
+        {
+            if (shopScene == null)
+                shopScene = new ShopScene(status); 
+
+            if (shopScene.Initialize() == false) 
+            {
+                // 에러 경고 문자열 출력 후 ShowMainScene()으로 돌아가기
+                Console.WriteLine("error");
+                return;
+            }
+            else
+            {
+                shopScene.ShowShop();
+            }
         }
     }
 }

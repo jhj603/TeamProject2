@@ -10,7 +10,7 @@ namespace TeamProject2
     {
         // private으로 접근 제한해놨으므로
         // Player 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
-        public int Attack
+        public float Attack
         {
             get { return attack; }
             set { attack = value; }
@@ -34,6 +34,11 @@ namespace TeamProject2
         {
             get { return currentDamage; }
         }
+        public int Gold
+        {
+            get { return gold; }
+            private set { gold = value; }
+        }
 
         public int CurrentDungeon { get; private set; } = 1;
         public int CurrentSkillCount { get; private set; } = 0;
@@ -49,8 +54,9 @@ namespace TeamProject2
         int error = 0;
         Random rand = null;
 
+        Inventory inventory = null;
 
-        private int attack = 0;            // 공격력
+        private float attack = 0;            // 공격력
 
         private int hp = 0;                // HP
 
@@ -94,6 +100,8 @@ namespace TeamProject2
                 if (skill.Level <= level)
                     ++CurrentSkillCount;
             }
+
+            inventory = new Inventory();
         }
 
         public void ShowStatus()
@@ -148,7 +156,7 @@ namespace TeamProject2
             else
             {
                 error = (int)Math.Ceiling(Attack * 0.1f);
-                currentDamage = rand.Next((Attack - error), (Attack + error + 1));         // 공격력 오차범위 생성
+                currentDamage = rand.Next((int)(Attack - error), (int)(Attack + error + 1));         // 공격력 오차범위 생성
             }
 
             // monster의 hp에서 player의 attack을 뺌
@@ -237,6 +245,98 @@ namespace TeamProject2
 
             if (0 > MP)
                 MP = 0;
+        }
+
+        public int ShowInventory(bool isIndex = false)
+        {
+            return inventory.PrintInven(isIndex);
+        }
+
+        public void BuyItem(BaseItem item)
+        {
+            inventory.AddItem(item);
+            Gold -= item.Gold;
+        }
+
+        public BaseItem SellItem(int index)
+        {
+            int cost = 0;
+
+            BaseItem item = inventory.SellItem(index, out cost);
+
+            Gold += cost;
+
+            return item;
+        }
+
+        public void PrintEquipable()
+        {
+            inventory.PrintEquip();
+        }
+
+        public int GetEquipSize()
+        {
+            return inventory.EquipableItems.Count;
+        }
+
+        public void Equip(int index)
+        {
+            inventory.Equip(index);
+        }
+
+        public void PrintPotions()
+        {
+            inventory.PrintPotions();
+        }
+
+        public int GetPotionSize()
+        {
+            return inventory.Potions.Count;
+        }
+
+        public void UsePotion(int index)
+        {
+            BaseItem usePotion = inventory.UsePotion(index);
+
+            switch (usePotion.Type)
+            {
+                case ItemType.Potion_HP:
+                    Hp += usePotion.Increase;
+
+                    if (maxhp < Hp)
+                        Hp = maxhp;
+                    break;
+                case ItemType.Potion_MP:
+                    MP += usePotion.Increase;
+
+                    if (MaxMP < MP)
+                        MP = MaxMP;
+                    break;
+                case ItemType.Potion_Atk:
+                    Attack += usePotion.Increase;
+                    break;
+                case ItemType.Potion_Dfs:
+                    defense += usePotion.Increase;
+                    break;
+                case ItemType.Potion_Exp:
+                    LevelUp(usePotion.Increase);
+                    break;
+            }
+        }
+
+        public void LevelUp(int exp)
+        {
+            Exp += exp;
+
+            if (MaxExp <= Exp)
+            {
+                ++Level;
+                Exp = 0;
+                MaxExp += IncreaseExp;
+                IncreaseExp += 5;
+                Attack += 0.5f;
+                defense += 1;
+            }
         }
     }
 }
