@@ -187,8 +187,13 @@ namespace TeamProject2
             Console.WriteLine($"{maxhp}");
             Console.ResetColor();
 
-
-            Console.WriteLine($"MP {MP} / {MaxMP}");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write($"MP {MP}");
+            Console.ResetColor();
+            Console.Write(" / ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"{MaxMP}");
+            Console.ResetColor();
         }
 
         public bool IsDodge()

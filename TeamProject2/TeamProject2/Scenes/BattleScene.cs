@@ -522,14 +522,16 @@ namespace TeamProject2
                 for (int i = 0; i < monsters.Count; i++)
                 {
                     // Monster.ShowMonsterStatus() 호출
-                    Console.Write($"{i + 1} ");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"[{i + 1}] ");
+                    Console.ResetColor();
                     monsters[i].ShowMonsterStatus();        // 숫자를 앞에 붙여 선택할 수 있게 해야 함
                 }
                 Console.WriteLine("=====================================");
                 Console.WriteLine();
 
                 // "[내정보]" 출력
-                Console.WriteLine("[내정보]");
+                Program.ColorDarkYellow("[내정보]");
 
                 // Player.ShowDungeonStatus() 호출
                 status.ShowDungeonStatus();
@@ -538,6 +540,7 @@ namespace TeamProject2
 
                 Console.WriteLine();
                 Console.WriteLine("0. 뒤로");
+
                 Console.Write(">> ");
                 
                 int skillCount = status.CurrentSkillCount;
@@ -606,7 +609,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Battle!!\n");
+                Program.ColorDarkRed("Battle!!\n");
 
                 Console.WriteLine($"{status.Name} 의 공격!");
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
@@ -632,7 +635,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Battle!!\n");
+                Program.ColorDarkRed("Battle!!\n");
 
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
                 Console.WriteLine($"{status.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
@@ -658,17 +661,21 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Battle!!");
+                Program.ColorDarkRed("Battle!!\n");
                 Console.WriteLine("");
 
+                Console.WriteLine("=====================================");
                 for (int i = 0; i < monsters.Count; ++i)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write($"[{i + 1}] ");
+                    Console.ResetColor();
                     monsters[i].ShowMonsterStatus();
                 }
-
+                Console.WriteLine("=====================================");
                 Console.WriteLine();
-                Console.WriteLine("[내정보]\n");
+
+                Program.ColorDarkYellow("[내정보]\n");
 
                 status.ShowDungeonStatus();
 
@@ -770,7 +777,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Battle!!\n");
+                Program.ColorDarkRed("Battle!!\n");
 
                 Console.WriteLine($"{status.Name} 의 {status.Skills[skillChoice].Name}!\n");
 
@@ -793,7 +800,7 @@ namespace TeamProject2
                             monsterHP -= listDamages[i][j];
 
                             if (0 >= monsterHP)
-                                Console.WriteLine("Dead\n");
+                                Program.ColorDarkRed("Dead\n");
                             else
                                 Console.WriteLine($"{monsterHP}\n");
                         }
@@ -842,7 +849,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Battle!!\n");
+                Program.ColorDarkRed("Battle!!\n");
 
                 Console.WriteLine($"{status.Name} 의 {status.Skills[skillChoice].Name}!\n");
 
@@ -865,7 +872,7 @@ namespace TeamProject2
                             monsterHP -= listDamages[i][j];
 
                             if (0 >= monsterHP)
-                                Console.WriteLine("Dead\n");
+                                Program.ColorDarkRed("Dead\n");
                             else
                                 Console.WriteLine($"{monsterHP}\n");
                         }
@@ -930,7 +937,7 @@ namespace TeamProject2
         {
             Console.Clear();
 
-            Console.WriteLine("Battle!!\n");
+            Program.ColorDarkRed("Battle!!\n");
 
             Console.WriteLine($"{status.Name} 의 {status.Skills[skillIndex].Name}!\n");
 
@@ -949,7 +956,7 @@ namespace TeamProject2
                     preHP -= damage;
 
                     if (0 >= preHP)
-                        Console.WriteLine("Dead\n");
+                        Program.ColorDarkRed("Dead\n");
                     else
                         Console.WriteLine($"{preHP}\n");
                 }
