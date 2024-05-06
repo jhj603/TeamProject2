@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,7 +80,13 @@ namespace TeamProject2
                 // 플레이어의 이름을 문자열 생성 후 출력
                 Console.WriteLine($"{status.Name}의 공격");
                 // 몬스터의 레벨, 이름, 플레이어의 데미지로 문자열 생성 후 출력
-                Console.WriteLine($"Lv. {monster.Level} {monster.Name}을(를) 맞췄습니다. [데미지 : {status.Random_attackErrorrange}]\n");
+                Console.Write($"Lv. {monster.Level} {monster.Name}을(를) 맞췄습니다. [데미지 : {status.CurrentDamage}]");
+
+                if (status.IsCritical)
+                    Console.WriteLine(" - 치명타 공격!!\n");
+                else
+                    Console.WriteLine("\n");
+
                 // 몬스터의 레벨, 이름을 문자열 생성 후 출력
                 Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
 
@@ -133,7 +140,13 @@ namespace TeamProject2
                 // 몬스터의 레벨, 이름을 문자열 생성 후 출력
                 Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
                 // 플레이어의 이름, 몬스터의 데미지로 문자열 생성 후 출력
-                Console.WriteLine($"{status.Name}을(를) 맞췄습니다. [데미지 : {monster.Attack}]\n");
+                Console.Write($"{status.Name}을(를) 맞췄습니다. [데미지 : {monster.CurrentDamage}]");
+
+                if (monster.IsCritical)
+                    Console.WriteLine(" - 치명타 공격!!\n");
+                else
+                    Console.WriteLine("\n");
+
                 Console.WriteLine($"Lv.{status.Level} {status.Name}");
                 Console.WriteLine($"HP {nowPlayerHp} -> {status.Hp}\n");
                 Console.WriteLine("0. 다음\n");
@@ -315,10 +328,6 @@ namespace TeamProject2
 
                         // "잘못된 입력입니다." 출력
                         Program.InputError();
-
-                        // 문자 입력
-
-                        // "잘못된 입력입니다." 출력
                         break;
                 }
 
@@ -377,14 +386,19 @@ namespace TeamProject2
                         }
                         else
                         {
-                            // Battle.MonsterHit(monster) 수행
-                            MonsterHit(monsters[num - 1]);
-                            // monsters의 모든 몬스터가 죽었으면   bool MonsterDeadCheck
-                            if (true == MonsterDeadCheck())
+                            if (monsters[num - 1].IsDodge())
+                                PrintMonsterDodge(monsters[num - 1]);
+                            else
                             {
-                                // Battle.PlayerVictory 수행 후 true 반환
-                                PlayerVictory();
-                                return true;
+                                // Battle.MonsterHit(monster) 수행
+                                MonsterHit(monsters[num - 1]);
+                                // monsters의 모든 몬스터가 죽었으면   bool MonsterDeadCheck
+                                if (true == MonsterDeadCheck())
+                                {
+                                    // Battle.PlayerVictory 수행 후 true 반환
+                                    PlayerVictory();
+                                    return true;
+                                }
                             }
                         }
 
@@ -394,14 +408,21 @@ namespace TeamProject2
                             // 안죽은 몬스터면 공격을 해라
                             if (0 < monsters[i].Hp)
                             {
-                                // Battle.PlayerHit(monster) 수행
-                                PlayerHit(monsters[i]);
-                                // player가 죽었으면
-                                if (0 == status.Hp)
+                                if (status.IsDodge())
                                 {
-                                    // Battle.PlayerLose 수행 후 true 반환
-                                    PlayerLose();
-                                    return true;
+                                    PrintPlayerDodge(monsters[i]);
+                                }
+                                else
+                                {
+                                    // Battle.PlayerHit(monster) 수행
+                                    PlayerHit(monsters[i]);
+                                    // player가 죽었으면
+                                    if (0 == status.Hp)
+                                    {
+                                        // Battle.PlayerLose 수행 후 true 반환
+                                        PlayerLose();
+                                        return true;
+                                    }
                                 }
                             }
                         }
@@ -423,6 +444,58 @@ namespace TeamProject2
             }
 
             return false;   // bool을 반환 타입으로 갖는 함수는 항상 bool 값을 반환해야 함
+        }
+
+        void PrintMonsterDodge(Monster monster)
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!\n");
+
+                Console.WriteLine($"{status.Name} 의 공격!");
+                Console.WriteLine($"Lv.{monster.Level} {monster.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
+
+                Console.WriteLine("0. 다음");
+
+                string input = Console.ReadLine();                     // 입력
+
+                if ("0" == input)
+                {
+                    return;
+                }
+                else                                                   // 문자 입력
+                {
+                    Program.InputError();                              // "잘못된 입력입니다." 출력
+                }
+            }
+        }
+
+        void PrintPlayerDodge(Monster monster)
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Battle!!\n");
+
+                Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
+                Console.WriteLine($"{status.Name} 을(를) 공격했지만 아무일도 일어나지 않았습니다.\n");
+
+                Console.WriteLine("0. 다음");
+
+                string input = Console.ReadLine();
+
+                if ("0" == input)
+                {
+                    return;
+                }
+                else                                                   // 문자 입력
+                {
+                    Program.InputError();                              // "잘못된 입력입니다." 출력
+                }
+            }
         }
     }
 }
