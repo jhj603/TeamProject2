@@ -30,11 +30,16 @@ namespace TeamProject2
             get { return name; }
             set { name = value; }
         }
-        public int Random_attackErrorrange
+        public int CurrentDamage
         {
-            get { return random_attackErrorrange; }
+            get { return currentDamage; }
         }
-    
+
+        public bool IsCritical { get; protected set; } = false;
+        int percent = 0;
+        int error = 0;
+        Random rand = null;
+
         private int attack = 0;            // 공격력
 
         private int hp = 0;                // HP
@@ -51,7 +56,7 @@ namespace TeamProject2
         
         private int maxhp = 0;             // 최대 HP
 
-        private int random_attackErrorrange = 0;
+        private int currentDamage = 0;
 
         public Player (int attack, int hp, int defense, int level, string name, string job, int gold)
         {
@@ -63,6 +68,8 @@ namespace TeamProject2
             this.job = job;
             this.gold = gold;
             this.maxhp = hp;
+
+            rand = new Random();  // 랜덤객채를 생성
         }
 
         public void ShowStatus()
@@ -79,12 +86,24 @@ namespace TeamProject2
 
         public void PlayerAttack(Monster monster)
         {
-            Random rand = new Random();  // 랜덤객채를 생성
-            int error = (int)Math.Ceiling(0.1f * Attack);
-            random_attackErrorrange = rand.Next((Attack - error), (Attack + error + 1));         // 공격력 오차범위 생성
+            IsCritical = false;
+
+            percent = rand.Next(0, 100);
+
+            if (15 > percent)
+            {
+                IsCritical = true;
+
+                currentDamage = (int)(Attack * 1.6f);
+            }
+            else
+            {
+                error = (int)Math.Ceiling(Attack * 0.1f);
+                currentDamage = rand.Next((Attack - error), (Attack + error + 1));         // 공격력 오차범위 생성
+            }
 
             // monster의 hp에서 player의 attack을 뺌
-            monster.Hp -= random_attackErrorrange;
+            monster.Hp -= currentDamage;
             // monster의 hp가 0 이하라면
             if (monster.Hp <= 0)
             {
@@ -97,6 +116,16 @@ namespace TeamProject2
         {
             Console.WriteLine($"Lv. {level} {name} ({job})");            // 레벨, 이름, 직업으로 문자열 생성 후 출력
             Console.WriteLine($"HP {hp}/{maxhp}");                       // HP로 문자열 생성 후 출력
+        }
+
+        public bool IsDodge()
+        {
+            percent = rand.Next(0, 100);
+
+            if (10 > percent)
+                return true;
+
+            return false;
         }
     }
 }

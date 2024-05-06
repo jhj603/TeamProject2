@@ -26,6 +26,8 @@ namespace TeamProject2
             this.hp = hp;
             this.level = level;
             this.name = name;
+
+            rand = new Random();
         }
         // Monster 클래스 외부에서 사용하려면 프로퍼티를 적용해야 함
         public int Attack
@@ -49,16 +51,37 @@ namespace TeamProject2
             set { name = value; }
         }
 
+        public bool IsCritical { get; protected set; } = false;
+        public int CurrentDamage { get; private set; }
+        int percent = 0;
+        int error = 0;
+        Random rand = null;
+
 
         public void MonsterAttack(Player player)
         {
-            player.Hp -= attack;    // player hp에서 monster의 attack을 뺌
+            IsCritical = false;
+
+            percent = rand.Next(0, 100);
+
+            if (15 > percent)
+            {
+                IsCritical = true;
+
+                CurrentDamage = (int)(Attack * 1.6f);
+            }
+            else
+            {
+                error = (int)Math.Ceiling(Attack * 0.1f);
+                CurrentDamage = rand.Next((int)(Attack - error), (int)(Attack + error + 1));
+            }
+
+            player.Hp -= CurrentDamage;    // player hp에서 monster의 attack을 뺌
 
             if(player.Hp <= 0)    // player의 hp가 0 이하라면
             {
                 player.Hp = 0;    // player의 hp = 0     
             }
-
         }
 
         public void ShowMonsterStatus()     
@@ -76,6 +99,16 @@ namespace TeamProject2
                 // 레벨, 이름, hp로 문자열 출력
                 Console.WriteLine($"HP {Hp}");
             }
+        }
+
+        public bool IsDodge()
+        {
+            percent = rand.Next(0, 100);
+
+            if (10 > percent)
+                return true;
+
+            return false;
         }
     }
 }
