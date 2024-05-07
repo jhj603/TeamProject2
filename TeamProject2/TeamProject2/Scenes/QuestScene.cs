@@ -29,7 +29,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Quest!!\n");
+                Program.ColorMagenta("Quest!!\n");
 
                 questManager.PrintQuests();
 

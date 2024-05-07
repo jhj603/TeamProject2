@@ -28,7 +28,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("상점");
+                Program.ColorDarkCyan("[ 상점 ]");
                 Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
 
                 Console.WriteLine("[보유 골드]");

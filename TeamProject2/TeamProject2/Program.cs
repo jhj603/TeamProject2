@@ -42,5 +42,12 @@
             Console.WriteLine(text);
             Console.ResetColor();
         }
+
+        public static void ColorMagenta(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
     }
 }
