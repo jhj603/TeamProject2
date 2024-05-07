@@ -27,7 +27,7 @@ namespace TeamProject2
             itemDict[ItemType.Weapon].Add(new BaseItem("초승달", "고대 엘프들이 직접 만든 활입니다.", ItemType.Weapon, 15, 3000));
             itemDict[ItemType.Weapon].Add(new BaseItem("불길한 스태프", "어딘가 불길함이 느껴지는 스태프입니다.", ItemType.Weapon, 20, 3500));
 
-            itemDict[ItemType.Armor_Head].Add(new BaseItem("철 투구", "투박한 철 투구입니다.", ItemType.Armor_Head, 5, 1000));
+            itemDict[ItemType.Armor_Head].Add(new BaseItem("철 투구", "투박한 철 투구입니다.(생각보다 단단합니다.)", ItemType.Armor_Head, 5, 1000));
             itemDict[ItemType.Armor_Chest].Add(new BaseItem("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", ItemType.Armor_Chest, 9, 2000));
             itemDict[ItemType.Armor_Pants].Add(new BaseItem("사슬 바지", "치명상을 막아줄 수 있는 사슬 바지입니다.", ItemType.Armor_Pants, 7, 1500));
 
@@ -35,7 +35,7 @@ namespace TeamProject2
             itemDict[ItemType.Potion_Dfs].Add(new BaseItem("경질화 물약", "마시면 몸이 단단해지는 물약입니다.", ItemType.Potion_Dfs, 3, 500));
             itemDict[ItemType.Potion_HP].Add(new BaseItem("회복 물약", "마시면 체력을 회복시켜 주는 물약입니다.", ItemType.Potion_HP, 10, 1000));
             itemDict[ItemType.Potion_MP].Add(new BaseItem("마나 회복 물약", "마시면 MP를 회복시켜 주는 물약입니다.", ItemType.Potion_MP, 10, 1000));
-            itemDict[ItemType.Potion_Exp].Add(new BaseItem("경험의 물약", "마시면 누군가의 경험을 체험할 수 있는 물약입니다.", ItemType.Potion_Exp, 30, 3000));
+            itemDict[ItemType.Potion_Exp].Add(new BaseItem("경험의 물약", "마시면 경험치를 증가시키는 물약입니다.", ItemType.Potion_Exp, 30, 3000));
         }
 
         public static ItemManager GetInstance()

@@ -28,11 +28,15 @@ namespace TeamProject2
             {
                 Console.Clear();
 
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("상점");
+                Console.ResetColor();
                 Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
 
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{status.Gold}\n");
+                Console.ResetColor();
 
                 Console.WriteLine("[아이템 목록]");
                 shop.PrintItemList();
@@ -71,11 +75,16 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("상점 - 아이템 구매");
+                Console.ForegroundColor= ConsoleColor.DarkCyan;
+                Console.Write("상점");
+                Console.ResetColor();
+                Console.WriteLine(" - 아이템 구매");
                 Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
 
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{status.Gold}\n");
+                Console.ResetColor();
 
                 Console.WriteLine("[아이템 목록]");
                 shop.PrintItemList(true);
@@ -124,11 +133,16 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("상점 - 아이템 판매");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("상점");
+                Console.ResetColor();
+                Console.WriteLine(" - 아이템 판매");
                 Console.WriteLine("필요없는 아이템을 팔 수 있는 상점입니다.\n");
 
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{status.Gold}\n");
+                Console.ResetColor();
 
                 Console.WriteLine("[아이템 목록]");
                 invenCount = status.ShowInventory(true);
