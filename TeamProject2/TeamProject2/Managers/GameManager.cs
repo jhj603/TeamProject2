@@ -109,7 +109,9 @@ namespace TeamProject2
                 Program.ColorDarkRed("전투 시작\n\n");
                 
                 Console.WriteLine("3. 인벤토리");
+                Console.ForegroundColor= ConsoleColor.DarkCyan;
                 Console.WriteLine("4. 상점");
+                Console.ResetColor();
                 Console.WriteLine("5. 퀘스트");
 
                 Console.WriteLine();

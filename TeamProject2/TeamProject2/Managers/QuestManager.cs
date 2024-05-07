@@ -57,13 +57,13 @@ namespace TeamProject2
             QuestList.Add(new LevelupQuest(
                 3,
                 "더욱 더 강해지기!",
-                1,
+                2,
                 QuestState.StandBy,
                 20,
                 rewards,
                 "던전에서 몬스터를 사냥하고 경험을 쌓아보게나.\n" +
                 "경험이 쌓일수록 자네는 더욱 더 성장하게 된다네.\n" +
-                "레벨을 1 증가시키고 오면 사냥에 도움이 될 아이템을 주겠네.\n"
+                "2레벨이 된 후 찾아오면 사냥에 도움이 될 아이템을 주겠네.\n"
                 ));
         }
 

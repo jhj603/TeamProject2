@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TeamProject2
@@ -110,7 +111,10 @@ namespace TeamProject2
         public void ShowStatus()
         {
             // 플레이어 필드를 사용해 문자열 생성 후 출력
-            Console.WriteLine($"Lv. {0:D1}{level}");
+            if (10 > level)
+                Console.WriteLine($"Lv. {0:D1}{level}");
+            else
+                Console.WriteLine($"Lv. {level}");
 
             Console.Write($"{"닉네임",-3} : ");
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -217,7 +221,7 @@ namespace TeamProject2
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"MP {MP}");
+            Console.Write($"MP  {MP}");
             Console.ResetColor();
             Console.Write(" / ");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -391,6 +395,21 @@ namespace TeamProject2
                 IncreaseExp += 5;
                 Attack += 0.5f;
                 defense += 1;
+
+                QuestManager questManager = QuestManager.GetInstance();
+
+                if (null != questManager)
+                {
+                    LevelupQuest levelupQuest = null;
+
+                    foreach (Quest quest in questManager.ProgressList)
+                    {
+                        levelupQuest = (quest as LevelupQuest);
+
+                        if (null != levelupQuest)
+                            levelupQuest.CheckFinish(Level);
+                    }
+                }
             }
         }
     }
