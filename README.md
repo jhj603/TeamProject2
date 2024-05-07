@@ -22,7 +22,7 @@ Program
 ConsoleUtility
 
 Managers
-- GameManager
+- [GameManager]()
 - ItemManager
 - QuestManager
 - SkillManager
