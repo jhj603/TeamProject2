@@ -54,16 +54,18 @@ namespace TeamProject2
             switch (CurrentState)
             {
                 case QuestState.StandBy:
-                    Console.WriteLine("수락 가능");
+                    Program.ColorYellow("수락 가능");
                     break;
                 case QuestState.Progress:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("진행 중");
+                    Console.ResetColor();
                     break;
                 case QuestState.CanFinish:
-                    Console.WriteLine("완료 가능");
+                    Program.ColorDarkGreen("완료 가능");
                     break;
                 case QuestState.Finish:
-                    Console.WriteLine("완료");
+                    Program.ColorGreen("완료");
                     break;
             }
         }

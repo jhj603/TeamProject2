@@ -29,7 +29,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Quest!!\n");
+                Program.ColorDarkCyan("[ Quest ]\n");
 
                 questManager.PrintQuests();
 
@@ -71,7 +71,7 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("Quest!!\n");
+                Program.ColorDarkCyan("[ Quest ]\n");
 
                 questManager.PrintParticularQuest(index);
 
