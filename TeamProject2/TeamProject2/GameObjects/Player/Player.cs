@@ -137,7 +137,7 @@ namespace TeamProject2
                 Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write($"{"체  력", -3}");
+            Console.Write("체  력");
             Console.ResetColor();
             Console.Write(" : ");
             Console.ForegroundColor = ConsoleColor.Red;
@@ -145,7 +145,7 @@ namespace TeamProject2
             Console.ResetColor();
 
             Console.ForegroundColor= ConsoleColor.DarkYellow;
-            Console.Write($"{"소지금", -3}");
+            Console.Write("소지금");
             Console.ResetColor();
             Console.Write(" : ");
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -153,9 +153,21 @@ namespace TeamProject2
             Console.ResetColor();
 
             Console.WriteLine();
-            Console.WriteLine($"M   P  : {MP}");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("마  나");
+            Console.ResetColor();
+            Console.Write(" : ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"{MP}");
+            Console.ResetColor();
 
-            Console.WriteLine($"EXP : {Exp}");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("경험치");
+            Console.ResetColor();
+            Console.Write(" : ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{Exp}");
+            Console.ResetColor();
             
             Console.WriteLine();
             Console.WriteLine("[스킬]");
