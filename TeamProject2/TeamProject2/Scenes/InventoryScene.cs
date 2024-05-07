@@ -56,7 +56,10 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("인벤토리 - 장착 관리");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("인벤토리");
+                Console.ResetColor();
+                Console.WriteLine(" - 장착 관리");
                 Console.WriteLine("보유 중인 장비를 장착, 해제할 수 있습니다.\n");
 
                 status.PrintEquipable();
@@ -91,7 +94,10 @@ namespace TeamProject2
             {
                 Console.Clear();
 
-                Console.WriteLine("인벤토리 - 포션 사용");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write("인벤토리");
+                Console.ResetColor();
+                Console.WriteLine(" - 포션 사용");
                 Console.WriteLine("보유 중인 포션을 사용할 수 있습니다.\n");
 
                 status.PrintPotions();
