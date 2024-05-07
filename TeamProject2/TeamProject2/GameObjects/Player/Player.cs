@@ -221,7 +221,7 @@ namespace TeamProject2
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"MP {MP}");
+            Console.Write($"MP  {MP}");
             Console.ResetColor();
             Console.Write(" / ");
             Console.ForegroundColor = ConsoleColor.Blue;
