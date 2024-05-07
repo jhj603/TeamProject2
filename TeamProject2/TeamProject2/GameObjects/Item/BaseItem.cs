@@ -46,7 +46,7 @@ namespace TeamProject2
             Increase = item.Increase;
         }
 
-        public void PrintItemInfo()
+        public void PrintItemInfoShop()
         {
             Console.Write($"{Name, 14}\t|");
             switch (Type)
@@ -76,6 +76,37 @@ namespace TeamProject2
                     break;
             }
             Console.Write($"{Desc, 28}\t");
+        }
+        public void PrintItemInfoInven()
+        {
+            Console.Write($"{Name, 16}\t|");
+            switch (Type)
+            {
+                case ItemType.Weapon:
+                    Console.Write($"{"공격력",6}+{Increase}\t|");
+                    break;
+                case ItemType.Armor_Head:
+                case ItemType.Armor_Chest:
+                case ItemType.Armor_Pants:
+                    Console.Write($"{"방어력",6}+{Increase}\t|");
+                    break;
+                case ItemType.Potion_Atk:
+                    Console.Write($"{"공격력 영구",7}+{Increase}\t|");
+                    break;
+                case ItemType.Potion_Dfs:
+                    Console.Write($"{"방어력 영구",7}+{Increase}\t|");
+                    break;
+                case ItemType.Potion_Exp:
+                    Console.Write($"{"경험치",6}+{Increase}\t|");
+                    break;
+                case ItemType.Potion_HP:
+                    Console.Write($"{"체력",6}+{Increase}\t|");
+                    break;
+                case ItemType.Potion_MP:
+                    Console.Write($"{"MP",6}+{Increase}\t|");
+                    break;
+            }
+            Console.Write($"{Desc}\t");
         }
     }
 }

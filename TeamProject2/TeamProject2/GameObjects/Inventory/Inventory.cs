@@ -133,7 +133,7 @@ namespace TeamProject2
                     ++i;
                 }
 
-                item.PrintItemInfo();
+                item.PrintItemInfoShop();
 
                 Console.WriteLine($"|{item.Gold * 0.85f} G");
             }
@@ -150,7 +150,7 @@ namespace TeamProject2
                     ++i;
                 }
 
-                item.PrintItemInfo();
+                item.PrintItemInfoShop();
 
                 Console.WriteLine($"|{item.Gold * 0.85f} G");
             }
@@ -173,7 +173,7 @@ namespace TeamProject2
                     Console.ResetColor();
                 }
 
-                EquipableItems[i].PrintItemInfo();
+                EquipableItems[i].PrintItemInfoInven();
 
                 Console.WriteLine();
             }
@@ -187,7 +187,7 @@ namespace TeamProject2
             {
                 Console.Write($" - {i + 1} ");
 
-                Potions[i].PrintItemInfo();
+                Potions[i].PrintItemInfoInven();
 
                 Console.WriteLine();
             }
