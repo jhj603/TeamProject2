@@ -111,7 +111,10 @@ namespace TeamProject2
         public void ShowStatus()
         {
             // 플레이어 필드를 사용해 문자열 생성 후 출력
-            Console.WriteLine($"Lv. {0:D1}{level}");
+            if (10 > level)
+                Console.WriteLine($"Lv. {0:D1}{level}");
+            else
+                Console.WriteLine($"Lv. {level}");
 
             Console.Write($"{"닉네임",-3} : ");
             Console.ForegroundColor = ConsoleColor.Cyan;
