@@ -21,19 +21,19 @@ Program
 
 ConsoleUtility
 
-Managers
-- [GameManager](https://github.com/jhj603/TeamProject2/wiki/GameManager)
-- ItemManager
+[Managers](https://github.com/jhj603/TeamProject2/wiki/Managers#gamemanager)
+- GameManager
+- temManager
 - QuestManager
 - SkillManager
 
-Scenes
+[Scenes](https://github.com/jhj603/TeamProject2/wiki/Scences)
 - BattleScene
 - InventoryScene
 - QuestScene
 - ShopScene
 
-GameObject
+[GameObject](https://github.com/jhj603/TeamProject2/wiki/GameObject)
 - Inventory
 - Item
 - Monster
