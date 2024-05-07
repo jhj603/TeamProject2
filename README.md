@@ -17,9 +17,9 @@
 
 ## 주요기능(?)
 
-Program
+[Program](https://github.com/jhj603/TeamProject2/wiki/Program)
 
-ConsoleUtility
+[ConsoleUtility](https://github.com/jhj603/TeamProject2/wiki/2.-ConsoleUtility)
 
 [Managers](https://github.com/jhj603/TeamProject2/wiki/Managers#gamemanager)
 - GameManager
