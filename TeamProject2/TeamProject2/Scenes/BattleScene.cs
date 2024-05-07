@@ -40,19 +40,19 @@ namespace TeamProject2
                 if (randomType == 0)
                 {
                     // 미니언 몬스터 생성
-                    monster = new Monster(2, "미니언", 15, 5, 2);
+                    monster = new Monster(2, "미니언", 15, 5, 2, 100);
                 }
                 // 랜덤한 수가 0이 아니고 1이면
                 else if (randomType == 1)
                 {
                     // 공허충 몬스터 생성
-                    monster = new Monster(3, "공허충", 10, 9, 3);
+                    monster = new Monster(3, "공허충", 10, 9, 3, 150);
                 }
                 // 랜덤한 수가 0도 아니고 1도 아니면
                 else
                 {
                     // 대포 미니언 생성
-                    monster = new Monster(5, "대포미니언", 25, 8, 5);
+                    monster = new Monster(5, "대포미니언", 25, 8, 5, 200);
                 }
                 // 만든 몬스터가 null이면
                 if (monsters == null)
@@ -217,6 +217,35 @@ namespace TeamProject2
                 else
                     Console.WriteLine($"-> {status.Exp}");
 
+                Console.WriteLine("\n[획득 아이템]");
+
+                int randomNum = 0;
+                int rewardGold = 0;
+                Random rand = new Random();
+
+                for (int i = 0; i < monsters.Count; ++i)
+                {
+                    randomNum = rand.Next(0, 10);
+
+                    if (5 > randomNum)
+                        rewardGold += monsters[i].Gold;
+                    else
+                    {
+                        randomNum = rand.Next((int)ItemType.Weapon, (int)ItemType.ItemTypeEnd);
+
+                        ItemManager itemManager = ItemManager.GetInstance();
+
+                        BaseItem getItem = new BaseItem(itemManager.GetRandomItem((ItemType)randomNum));
+
+                        Console.WriteLine($"{getItem.Name}");
+
+                        status.GetItem(getItem);
+                    }
+                }
+
+                Console.WriteLine($"{rewardGold} Gold\n");
+
+                status.Gold += rewardGold;
 
                 // 나머지 문자열 출력
 
