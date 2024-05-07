@@ -39,9 +39,9 @@ namespace TeamProject2
 
                     Console.WriteLine("1. 전사");
                     Console.WriteLine("2. 마법사");
-                    Console.WriteLine("3. 도적");
-                    Console.WriteLine("4. 궁수");
-                    Console.WriteLine("5. ?????\n");
+                    Console.WriteLine("3. 궁수");
+                    //Console.WriteLine("4. 도적");
+                    //Console.WriteLine("5. ?????\n");
 
                     Console.Write(">> ");
 
@@ -64,19 +64,19 @@ namespace TeamProject2
                         }
                         else if (jobNumInput == 3)
                         {
-                            status = new Player(15, 85, 5, 1, nameInput, "도적", 15000, 50);
+                            status = new Player(15, 85, 5, 1, nameInput, "궁수", 15000, 50);
                             break;
                         }
-                        else if (jobNumInput == 4)
-                        {
-                            status = new Player(18, 80, 5, 1, nameInput, "궁수", 15000, 50);
-                            break;
-                        }
-                        else if (jobNumInput == 5)
-                        {
-                            status = new Player(random.Next(10, 21), random.Next(80,101), 5, 1, nameInput, "?????", random.Next(0, 10001), random.Next(30, 81));
-                            break;
-                        }
+                        //else if (jobNumInput == 4)
+                        //{
+                        //    status = new Player(18, 80, 5, 1, nameInput, "도적", 15000, 50);
+                        //    break;
+                        //}
+                        //else if (jobNumInput == 5)
+                        //{
+                        //    status = new Player(random.Next(10, 21), random.Next(80,101), 5, 1, nameInput, "?????", random.Next(0, 10001), random.Next(30, 81));
+                        //    break;
+                        //}
                         else
                         {
                             Program.InputError();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
@@ -15,6 +16,7 @@ namespace TeamProject2
         List<Monster> monsters = null;      // 몬스터 객체들을 모아놓는 리스트
 
         int startHP = 0;                    // 배틀 시작 시 플레이어의 hp
+        int IncreaseExp = 0;
 
         public BattleScene(Player _status)
         {
@@ -38,19 +40,19 @@ namespace TeamProject2
                 if (randomType == 0)
                 {
                     // 미니언 몬스터 생성
-                    monster = new Monster(2, "미니언", 15, 5);
+                    monster = new Monster(2, "미니언", 15, 5, 2);
                 }
                 // 랜덤한 수가 0이 아니고 1이면
                 else if (randomType == 1)
                 {
                     // 공허충 몬스터 생성
-                    monster = new Monster(3, "공허충", 10, 9);
+                    monster = new Monster(3, "공허충", 10, 9, 3);
                 }
                 // 랜덤한 수가 0도 아니고 1도 아니면
                 else
                 {
                     // 대포 미니언 생성
-                    monster = new Monster(5, "대포미니언", 25, 8);
+                    monster = new Monster(5, "대포미니언", 25, 8, 5);
                 }
                 // 만든 몬스터가 null이면
                 if (monsters == null)
@@ -68,6 +70,7 @@ namespace TeamProject2
         {       
             // 변수를 만들어서 현재 monster의 HP 저장
             int nowMonsterHp = monster.Hp;
+
             // Player.PlayerAttack(monster) 수행
             status.PlayerAttack(monster);
             // 무한 반복
@@ -95,6 +98,8 @@ namespace TeamProject2
                 {
                     Console.Write($"HP {nowMonsterHp} -> ");
                     Program.ColorDarkRed("Dead\n");
+
+                    IncreaseExp += monster.Exp;
                 }
                 else
                 {
@@ -203,7 +208,15 @@ namespace TeamProject2
                 Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.");    // monsters의 크기로 "던전에서 몬스터 ~마리를 잡았습니다." 문자열 생성 후 출력
                 Console.WriteLine();
                 Console.WriteLine($"Lv. {status.Level} {status.Name}");    // player의 레벨, 이름 으로 문자열 생성 후 출력
-                Console.WriteLine($"HP {startHP} -> {status.Hp}\n");    // starthHp와 player의 hp로 문자열 생성 후 출력
+                Console.WriteLine($"HP {startHP} -> {status.Hp}");    // starthHp와 player의 hp로 문자열 생성 후 출력
+                Console.Write($"EXP {status.Exp} -");
+
+                int increaseLevel = 0;
+                if (status.LevelUp(IncreaseExp, out increaseLevel))
+                    Console.WriteLine($" Level UP + {increaseLevel} -> {status.Exp}");
+                else
+                    Console.WriteLine($"-> {status.Exp}");
+
 
                 // 나머지 문자열 출력
 
@@ -294,6 +307,7 @@ namespace TeamProject2
         {
             // startHP에 현재 플레이어의 hp 저장
             startHP = status.Hp;
+            IncreaseExp = 0;
 
             // 무한 반복
             while (true)
@@ -732,6 +746,7 @@ namespace TeamProject2
             int count = 0;
             int randIndex = 0;
             int monsterHP = 0;
+            int preExp = 0;
 
             bool isEscape = true;
 
@@ -800,7 +815,10 @@ namespace TeamProject2
                             monsterHP -= listDamages[i][j];
 
                             if (0 >= monsterHP)
+                            {
                                 Program.ColorDarkRed("Dead\n");
+                                IncreaseExp += monsters[listRandIndex[i]].Exp;
+                            }
                             else
                                 Console.WriteLine($"{monsterHP}\n");
                         }
@@ -872,7 +890,10 @@ namespace TeamProject2
                             monsterHP -= listDamages[i][j];
 
                             if (0 >= monsterHP)
+                            {
                                 Program.ColorDarkRed("Dead\n");
+                                IncreaseExp += monsters[i].Exp;
+                            }
                             else
                                 Console.WriteLine($"{monsterHP}\n");
                         }
@@ -956,7 +977,10 @@ namespace TeamProject2
                     preHP -= damage;
 
                     if (0 >= preHP)
+                    {
                         Program.ColorDarkRed("Dead\n");
+                        IncreaseExp += monster.Exp;
+                    }
                     else
                         Console.WriteLine($"{preHP}\n");
                 }
