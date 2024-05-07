@@ -22,7 +22,7 @@ Program
 ConsoleUtility
 
 Managers
-- [GameManager]()
+- [GameManager](https://github.com/jhj603/TeamProject2/wiki/GameManager)
 - ItemManager
 - QuestManager
 - SkillManager
