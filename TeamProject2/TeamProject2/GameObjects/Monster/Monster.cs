@@ -20,12 +20,13 @@ namespace TeamProject2
 
         private string name = null;
 
-        public Monster(int level, string name, int hp, int attack)
+        public Monster(int level, string name, int hp, int attack, int exp)
         {
             this.attack = attack;
             this.hp = hp;
             this.level = level;
             this.name = name;
+            Exp = exp;
 
             rand = new Random();
         }
@@ -57,6 +58,7 @@ namespace TeamProject2
         int error = 0;
         Random rand = null;
 
+        public int Exp { get; private set; }
 
         public void MonsterAttack(Player player)
         {

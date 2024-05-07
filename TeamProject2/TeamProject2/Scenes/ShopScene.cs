@@ -157,10 +157,12 @@ namespace TeamProject2
 
                 if (int.TryParse(strInput, out inputNum))
                 {
-                    if ((0 < inputNum) && (shop.Count >= inputNum))
+                    if ((0 < inputNum) && ((status.GetEquipSize() + status.GetPotionSize()) >= inputNum))
                         shop.SellItem(status.SellItem(inputNum));
                     else if (0 == inputNum)
                         return;
+                    else
+                        Program.InputError();
                 }
                 else
                 {

@@ -54,7 +54,14 @@ namespace TeamProject2
             }
 
             if (EquipItems[EquipableItems[index - 1].Type] == EquipableItems[index - 1])
+            {
+                if (ItemType.Weapon == EquipableItems[index - 1].Type)
+                    status.IncreaseAtk -= EquipableItems[index - 1].Increase;
+                else
+                    status.IncreaseDfs -= EquipableItems[index - 1].Increase;
+                
                 EquipItems[EquipableItems[index - 1].Type] = null;
+            }
 
             item = EquipableItems[index - 1];
 

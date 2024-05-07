@@ -154,6 +154,10 @@ namespace TeamProject2
 
             Console.WriteLine();
             Console.WriteLine($"M   P  : {MP}");
+
+            Console.WriteLine($"EXP : {Exp}");
+            
+            Console.WriteLine();
             Console.WriteLine("[스킬]");
 
             PrintSkills();
@@ -205,7 +209,11 @@ namespace TeamProject2
         public void ShowDungeonStatus()
         {
             // 레벨, 이름, 직업으로 문자열 생성 후 출력
-            Console.Write($"Lv. {0:D1}{level} ");
+            if (10 > level)
+                Console.Write($"Lv. {0:D1}{level} ");
+            else
+                Console.Write($"Lv. {level} ");
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{name}");
             Console.ResetColor();
@@ -378,23 +386,34 @@ namespace TeamProject2
                     defense += usePotion.Increase;
                     break;
                 case ItemType.Potion_Exp:
-                    LevelUp(usePotion.Increase);
+                    if (LevelUp(usePotion.Increase, out int increaseLevel))
+                    {
+                        Console.WriteLine("\n레벨업 했습니다!");
+
+                        Thread.Sleep(1000);
+                    }
                     break;
             }
         }
 
-        public void LevelUp(int exp)
+        public bool LevelUp(int exp, out int increaseLevel)
         {
+            bool isLevelUp = false;
+
             Exp += exp;
 
-            while (MaxExp < Exp)
+            increaseLevel = 0;
+
+            while (MaxExp <= Exp)
             {
+                isLevelUp = true;
                 ++Level;
                 Exp -= MaxExp;
                 MaxExp += IncreaseExp;
                 IncreaseExp += 5;
                 Attack += 0.5f;
                 defense += 1;
+                ++increaseLevel;
 
                 QuestManager questManager = QuestManager.GetInstance();
 
@@ -411,6 +430,8 @@ namespace TeamProject2
                     }
                 }
             }
+
+            return isLevelUp;
         }
     }
 }
