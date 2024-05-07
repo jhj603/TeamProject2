@@ -12,6 +12,8 @@ namespace TeamProject2
 
         Dictionary<ItemType, List<BaseItem>> itemDict = null;
 
+        Random rand = null;
+
         private ItemManager()
         {
             itemDict = new Dictionary<ItemType, List<BaseItem>>();
@@ -36,6 +38,8 @@ namespace TeamProject2
             itemDict[ItemType.Potion_HP].Add(new BaseItem("회복 물약", "마시면 체력을 회복시켜 주는 물약입니다.", ItemType.Potion_HP, 10, 1000));
             itemDict[ItemType.Potion_MP].Add(new BaseItem("마나 회복 물약", "마시면 MP를 회복시켜 주는 물약입니다.", ItemType.Potion_MP, 10, 1000));
             itemDict[ItemType.Potion_Exp].Add(new BaseItem("경험의 물약", "마시면 경험치를 증가시키는 물약입니다.", ItemType.Potion_Exp, 30, 3000));
+
+            rand = new Random();
         }
 
         public static ItemManager GetInstance()
@@ -66,6 +70,17 @@ namespace TeamProject2
             }
 
             return findItem;
+        }
+
+        public BaseItem GetRandomItem(ItemType type)
+        {
+            BaseItem randomItem = null;
+
+            int randomIndex = rand.Next(0, itemDict[type].Count);
+
+            randomItem = itemDict[type][randomIndex];
+
+            return randomItem;
         }
     }
 }
