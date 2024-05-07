@@ -15,25 +15,25 @@
 - Visual Studio 8.0
 - C#
 
-## 주요기능(?)
+## 구조
 
-[Program](https://github.com/jhj603/TeamProject2/wiki/1.-Program)
+[1. Program](https://github.com/jhj603/TeamProject2/wiki/1.-Program)
 
-[ConsoleUtility](https://github.com/jhj603/TeamProject2/wiki/2.-ConsoleUtility)
+[2. ConsoleUtility](https://github.com/jhj603/TeamProject2/wiki/2.-ConsoleUtility)
 
-[Managers](https://github.com/jhj603/TeamProject2/wiki/3.-Managers)
+[3. Managers](https://github.com/jhj603/TeamProject2/wiki/3.-Managers)
 - GameManager
 - temManager
 - QuestManager
 - SkillManager
 
-[Scenes](https://github.com/jhj603/TeamProject2/wiki/4.-Scences)
+[4. Scenes](https://github.com/jhj603/TeamProject2/wiki/4.-Scences)
 - BattleScene
 - InventoryScene
 - QuestScene
 - ShopScene
 
-[GameObject](https://github.com/jhj603/TeamProject2/wiki/5.-GameObject)
+[5. GameObject](https://github.com/jhj603/TeamProject2/wiki/5.-GameObject)
 - Inventory
 - Item
 - Monster
