@@ -17,7 +17,7 @@
 
 ## 주요기능(?)
 
-[Program](https://github.com/jhj603/TeamProject2/wiki/Program)
+[Program](https://github.com/jhj603/TeamProject2/wiki/1.-Program)
 
 [ConsoleUtility](https://github.com/jhj603/TeamProject2/wiki/2.-ConsoleUtility)
 
