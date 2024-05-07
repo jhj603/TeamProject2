@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TeamProject2
@@ -91,6 +92,21 @@ namespace TeamProject2
                     status.IncreaseAtk += EquipableItems[index].Increase;
                 else
                     status.IncreaseDfs += EquipableItems[index].Increase;
+
+                QuestManager questManager = QuestManager.GetInstance();
+
+                if (null != questManager)
+                {
+                    EquipQuest equipQuest = null;
+
+                    foreach (Quest quest in questManager.ProgressList)
+                    {
+                        equipQuest = (quest as EquipQuest);
+
+                        if (null != equipQuest)
+                            equipQuest.CheckFinish(EquipableItems[index].Type, EquipableItems[index].Name);
+                    }
+                }
             }
         }
 

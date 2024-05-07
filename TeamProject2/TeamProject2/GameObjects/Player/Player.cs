@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TeamProject2
@@ -391,6 +392,21 @@ namespace TeamProject2
                 IncreaseExp += 5;
                 Attack += 0.5f;
                 defense += 1;
+
+                QuestManager questManager = QuestManager.GetInstance();
+
+                if (null != questManager)
+                {
+                    LevelupQuest levelupQuest = null;
+
+                    foreach (Quest quest in questManager.ProgressList)
+                    {
+                        levelupQuest = (quest as LevelupQuest);
+
+                        if (null != levelupQuest)
+                            levelupQuest.CheckFinish(Level);
+                    }
+                }
             }
         }
     }
